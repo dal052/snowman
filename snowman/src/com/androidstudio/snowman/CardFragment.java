@@ -1,6 +1,6 @@
 package com.androidstudio.snowman;
 
-import com.androidstudio.snowman.aux.Card;
+import com.androidstudio.snowman.auxiliary.Card;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
