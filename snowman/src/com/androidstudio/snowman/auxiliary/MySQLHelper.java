@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.androidstudio.snowman.aux;
+package com.androidstudio.snowman.auxiliary;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

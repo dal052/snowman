@@ -1,4 +1,4 @@
-package com.androidstudio.snowman.aux;
+package com.androidstudio.snowman.auxiliary;
 
 import com.androidstudio.snowman.CardFragment;
 import android.support.v4.app.Fragment;

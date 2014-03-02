@@ -1,4 +1,4 @@
-package com.androidstudio.snowman.aux;
+package com.androidstudio.snowman.auxiliary;
 
 import android.os.Parcel;
 import android.os.Parcelable;
