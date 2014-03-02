@@ -1,9 +1,8 @@
-package com.androidstudio.snowman.aux;
+package com.androidstudio.snowman.auxiliary;
 
 import com.androidstudio.snowman.CardFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import java.util.ArrayList;
 

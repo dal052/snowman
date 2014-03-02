@@ -29,15 +29,17 @@ public final class R {
     }
     public static final class drawable {
         public static final int aslogo=0x7f020000;
-        public static final int ic_launcher=0x7f020001;
+        public static final int ic_action_new=0x7f020001;
+        public static final int ic_launcher=0x7f020002;
     }
     public static final class id {
+        public static final int action_new=0x7f0a000c;
         public static final int action_settings=0x7f0a000b;
         public static final int click_cancel=0x7f0a0003;
         public static final int click_post=0x7f0a0002;
         public static final int drawer_layout=0x7f0a0004;
-        public static final int enter_answer=0x7f0a0001;
-        public static final int enter_description=0x7f0a0000;
+        public static final int enter_back=0x7f0a0001;
+        public static final int enter_front=0x7f0a0000;
         public static final int fullView=0x7f0a0007;
         public static final int fullView2=0x7f0a0009;
         public static final int left_drawer=0x7f0a0006;
@@ -61,18 +63,19 @@ public final class R {
         public static final int popupdialog2=0x7f090004;
     }
     public static final class string {
+        public static final int action_new=0x7f06000a;
         public static final int action_settings=0x7f060005;
         public static final int app_name=0x7f060000;
         public static final int click_cancel=0x7f060004;
         public static final int click_post=0x7f060003;
-        public static final int enter_answer=0x7f060002;
-        public static final int enter_description=0x7f060001;
+        public static final int enter_back=0x7f060001;
+        public static final int enter_front=0x7f060002;
         public static final int hello_world=0x7f060007;
         public static final int title_activity_add_card=0x7f060008;
         public static final int title_activity_card_fragment=0x7f060009;
         public static final int title_activity_main=0x7f060006;
-        public static final int title_activity_popupdialog=0x7f06000a;
-        public static final int title_activity_popupdialog2=0x7f06000b;
+        public static final int title_activity_popupdialog=0x7f06000b;
+        public static final int title_activity_popupdialog2=0x7f06000c;
     }
     public static final class style {
         /** 

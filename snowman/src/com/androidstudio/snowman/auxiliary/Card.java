@@ -1,4 +1,4 @@
-package com.androidstudio.snowman.aux;
+package com.androidstudio.snowman.auxiliary;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -29,6 +29,7 @@ public class Card implements Parcelable {
 		this.print = bool;
 	}
 
+	//used when make new card 
 	public Card(String group, String front, String back) {
 		this.group = group;
 		this.front = front;
@@ -51,6 +52,7 @@ public class Card implements Parcelable {
 		this.id = id;
 	}
 
+	//get groups
 	public String getGroup() {
 		return group;
 	}
@@ -58,6 +60,7 @@ public class Card implements Parcelable {
 		this.group = group;
 	}
 
+	//get front values
 	public String getFront() {
 		return front;
 	}
@@ -66,6 +69,7 @@ public class Card implements Parcelable {
 		this.front = front;
 	}
 
+	//get back values
 	public String getBack() {
 		return back;
 	}

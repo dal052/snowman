@@ -1,35 +1,39 @@
 package com.androidstudio.snowman;
 
-import com.androidstudio.snowman.aux.Card;
-import com.androidstudio.snowman.aux.CardHandler;
+import com.androidstudio.snowman.auxiliary.Card;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 
 public class AddCardActivity extends Activity {
-	private CardHandler cardhandler;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_card);
-		
 	}
 	
-	public void createCard(View view){
-		Intent cards = new Intent(this, MainActivity.class);
-		EditText cardAns = (EditText) findViewById(R.id.enter_answer);
-		EditText cardDesc = (EditText) findViewById(R.id.enter_description);
+	public void addCard(View view){
+		EditText cardBack = (EditText) findViewById(R.id.enter_back);
+		EditText cardFront = (EditText) findViewById(R.id.enter_front);
 		
-		Card newCard = new Card("", cardAns.getText().toString(),
-							 cardDesc.getText().toString() );
-		cardhandler.createCard(newCard);
-		startActivity(cards);
+		//add card to database and show on screen based on clicked button
+		switch(view.getId()){
+		case R.id.click_post:
+			Card newCard = new Card("", cardBack.getText().toString(),
+					cardFront.getText().toString());
+			MainActivity.cardhandler.createCard(newCard);
+			MainActivity.addNewCard = true;
+			break;
+		case R.id.click_cancel:
+			break;
+		}		
+		finish();		
 	}
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -37,5 +41,8 @@ public class AddCardActivity extends Activity {
 		getMenuInflater().inflate(R.menu.add_card, menu);
 		return true;
 	}
+
+	
+	
 
 }

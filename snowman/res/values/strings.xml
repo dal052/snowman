@@ -2,8 +2,8 @@
 <resources>
 
     <string name="app_name">Study Buddy</string>
-    <string name="enter_description">Enter description</string>
-    <string name="enter_answer">Enter answer</string>
+    <string name="enter_back">Enter Back</string>
+    <string name="enter_front">Enter Front</string>
     <string name="click_post">Post</string>
     <string name="click_cancel">Cancel</string>
     <string name="action_settings">Settings</string>
@@ -11,7 +11,8 @@
     <string name="hello_world">Hello Snowman</string>
     <string name="title_activity_add_card">AddCard</string>
     <string name="title_activity_card_fragment">CardFragment</string>
-
+	<string name="action_new">New Card</string>
+    
     <string-array name="groups">
         <item>Group 1</item>
         <item>Group 2</item>

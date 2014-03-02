@@ -1,13 +1,19 @@
 package com.androidstudio.snowman;
 
+<<<<<<< HEAD
 import com.androidstudio.snowman.aux.Card;
 
 import com.androidstudio.snowman.aux.PagerAdapter;
+=======
+>>>>>>> 8861d53a2f14c181dd07cdacf9318f456afaeafd
 import com.androidstudio.snowman.auxiliary.Card;
 import com.androidstudio.snowman.auxiliary.CardHandler;
 import com.androidstudio.snowman.auxiliary.PagerAdapter;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8861d53a2f14c181dd07cdacf9318f456afaeafd
 import java.util.ArrayList;
 
 import android.content.Intent;
@@ -41,7 +47,10 @@ public class MainActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8861d53a2f14c181dd07cdacf9318f456afaeafd
 		instance = this;
 		
 		// Set things for drawer to work
@@ -53,6 +62,7 @@ public class MainActivity extends FragmentActivity {
 		drawerList.setAdapter(new ArrayAdapter<String>(
 				this, android.R.layout.simple_list_item_1, groups));
 		
+<<<<<<< HEAD
 		cardhandler = new CardHandler(this);
 		cardhandler.open();
 		/*
@@ -60,6 +70,12 @@ public class MainActivity extends FragmentActivity {
 		cardhandler.createCard(new Card("Group 1", "hellehele", "hohoho"));
 		cardhandler.createCard(new Card("Group 1", "whowhwoho", "hohoho"));
 		*/
+=======
+		//get cardhandler to store in data base
+		cardhandler = new CardHandler(this);
+		cardhandler.open();
+
+>>>>>>> 8861d53a2f14c181dd07cdacf9318f456afaeafd
 		// Set up list for cards
 		cards = cardhandler.getAllCards();
 		
@@ -97,11 +113,31 @@ public class MainActivity extends FragmentActivity {
 	}
 
 	@Override
+	protected void onResume() {
+		super.onResume();
+		
+		if(addNewCard) {
+			Card newCard = cardhandler.lastCard();
+			cards.add(newCard);
+		
+			// add a new fragment
+			fragments.add(CardFragment.newInstance(newCard));
+			pager.getAdapter().notifyDataSetChanged();
+			
+			// set the current card to the new card
+			pager.setCurrentItem(fragments.size() -1);
+			
+			addNewCard = false;
+		}
+	}
+
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);		
 		return true;
 	}
+<<<<<<< HEAD
 	
 	/*private void getCards(ArrayList<Card> cards) {
 		for(int i=1; i<=numberOfCards; ++i) {
@@ -122,25 +158,38 @@ public class MainActivity extends FragmentActivity {
 		}
 	}*/
 	
+=======
+
+	//getter for card
+>>>>>>> 8861d53a2f14c181dd07cdacf9318f456afaeafd
 	public ArrayList<Card> getCards() {
 		return cards;
 	}
 
+<<<<<<< HEAD
 
 	}
 
+=======
+	//getter for fragment
+>>>>>>> 8861d53a2f14c181dd07cdacf9318f456afaeafd
 	public ArrayList<CardFragment> getFragments() {
 		return fragments;
 	}
 
 	
 
+<<<<<<< HEAD
+=======
+	//allow card to swipe back and forth 
+>>>>>>> 8861d53a2f14c181dd07cdacf9318f456afaeafd
 	private void getFragments(ArrayList<CardFragment> fragments) {
 		for(int i=0; i<cards.size(); ++i) {
 			fragments.add(CardFragment.newInstance(cards.get(i)));
 		}
 	}
 	
+<<<<<<< HEAD
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -155,6 +204,8 @@ public class MainActivity extends FragmentActivity {
 	}
 
 	
+=======
+>>>>>>> 8861d53a2f14c181dd07cdacf9318f456afaeafd
 	public static synchronized MainActivity getMainActivity() {
 		return instance;
 	}
@@ -173,9 +224,12 @@ public class MainActivity extends FragmentActivity {
 
 	
 	
+<<<<<<< HEAD
 	
 	
 	
 	
 	
+=======
+>>>>>>> 8861d53a2f14c181dd07cdacf9318f456afaeafd
 }
