@@ -1,7 +1,6 @@
 package com.androidstudio.snowman;
 
 import com.androidstudio.snowman.auxiliary.Card;
-
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;

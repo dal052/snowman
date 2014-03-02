@@ -1,11 +1,11 @@
 package com.androidstudio.snowman;
 
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Random;
 
 import com.androidstudio.snowman.auxiliary.Card;
-
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.app.Dialog;
@@ -68,16 +68,28 @@ public class NotiService extends Service{
 					// if mainActivity is on top do the Status notificaton
 					if(mainName.equalsIgnoreCase(topAct())){
 						// call notification method
-						generateNotification(getApplicationContext(), "FUCK ANDROID", notiCounter);					
+						
+						// wait on the status noti after starting app.
+						new CountDownTimer(5000, 5000) {
+							// on tick the pulled down will go back to active
+							public void onTick(long millisUntilFinished) {
+								// nothing need here.
+							}	
+							// on finish repost the place it. 
+							public void onFinish() {
+								generateNotification(getApplicationContext(), "FUCK ANDROID", notiCounter);										
+							}
+						}.start();
 					}
 				}
 				// if the app is not on the foreground call showdialog.
 				if( onForeground() == false){
-//					showDialog();
+					
+					showDialog();
 
 				}
 				// THIS IS THE PARAMTER call the freq method.
-				handler.postDelayed(notiService, 7000);	
+				handler.postDelayed(notiService, 20000);	
 			}
 		};		
 	}
@@ -141,7 +153,7 @@ public class NotiService extends Service{
 	 * @param text
 	 */
 	private void generateNotification(Context context, String message, int number) {
-		int icon = R.drawable.ic_launcher; // set icon 
+		int icon = R.drawable.study_buddy_icon1; // set icon 
 		long when = System.currentTimeMillis(); // current time.
 
 

@@ -7,7 +7,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".AddCardActivity" >
+    tools:context=".AddCardActivity" 
+    android:icon="@drawable/studybuddy">
 
     <EditText
         android:id="@+id/enter_front"
@@ -20,20 +21,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/enter_back" />
-        
-     <Button
+
+    <Button
         android:id="@+id/click_post"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/click_post" 
-        android:onClick="addCard" />
-     
-     
-     <Button
-         android:id="@+id/click_cancel"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:text="@string/click_cancel" 
-         android:onClick="addCard"/>
+        android:onClick="addCard"
+        android:text="@string/click_post" />
+
+    <Button
+        android:id="@+id/click_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="addCard"
+        android:text="@string/click_cancel" />
 
 </LinearLayout>
