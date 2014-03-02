@@ -23,6 +23,7 @@ public class MySQLHelper extends SQLiteOpenHelper {
 	public static final String DATABASE_TABLE = "Card";
 	public static final int DATABASE_VERSION = 1;
 	
+	//create database that store informations in
 	public static final String DATABASE_CREATE = 
 		"CREATE TABLE " + DATABASE_TABLE + " ("
 	    + CARD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -38,6 +39,7 @@ public class MySQLHelper extends SQLiteOpenHelper {
 		db.execSQL(DATABASE_CREATE);
 	}
 
+	//upgrade the database version
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 	    Log.w(MySQLHelper.class.getName(),

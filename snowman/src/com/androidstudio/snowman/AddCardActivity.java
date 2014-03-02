@@ -1,13 +1,9 @@
 package com.androidstudio.snowman;
 
-import java.util.ArrayList;
-
 import com.androidstudio.snowman.auxiliary.Card;
-import com.androidstudio.snowman.auxiliary.CardHandler;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
@@ -21,25 +17,21 @@ public class AddCardActivity extends Activity {
 	}
 	
 	public void addCard(View view){
+		EditText cardBack = (EditText) findViewById(R.id.enter_back);
+		EditText cardFront = (EditText) findViewById(R.id.enter_front);
 		
-		EditText cardAns = (EditText) findViewById(R.id.enter_answer);
-		EditText cardDesc = (EditText) findViewById(R.id.enter_description);
-		
-		
+		//add card to database and show on screen based on clicked button
 		switch(view.getId()){
 		case R.id.click_post:
-			Card newCard = new Card("", cardAns.getText().toString(),
-					cardDesc.getText().toString());
+			Card newCard = new Card("", cardBack.getText().toString(),
+					cardFront.getText().toString());
 			MainActivity.cardhandler.createCard(newCard);
 			MainActivity.addNewCard = true;
 			break;
 		case R.id.click_cancel:
 			break;
-		}
-		
-		finish();
-		
-		
+		}		
+		finish();		
 	}
 
 

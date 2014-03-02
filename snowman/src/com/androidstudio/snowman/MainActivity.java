@@ -48,13 +48,10 @@ public class MainActivity extends FragmentActivity {
 		drawerList.setAdapter(new ArrayAdapter<String>(
 				this, android.R.layout.simple_list_item_1, groups));
 		
+		//get cardhandler to store in data base
 		cardhandler = new CardHandler(this);
 		cardhandler.open();
-		/*
-		cardhandler.createCard(new Card("Group 1", "hahaha", "hohoho"));
-		cardhandler.createCard(new Card("Group 1", "hellehele", "hohoho"));
-		cardhandler.createCard(new Card("Group 1", "whowhwoho", "hohoho"));
-		*/
+
 		// Set up list for cards
 		cards = cardhandler.getAllCards();
 		
@@ -94,36 +91,19 @@ public class MainActivity extends FragmentActivity {
 		return true;
 	}
 
-	
-	/*private void getCards(ArrayList<Card> cards) {
-		for(int i=1; i<=numberOfCards; ++i) {
-			cards.add(new Card(
-					"Group 1", 
-					"Card " + i + "\nUsing this approach, you need to keep track of the string tags " +
-							"and associate them with all the fragment pages. You could use a map to store " +
-							"each tag along with the current page index, which is set at the time when the " +
-							"fragment page is instantiated.\n",
-					"Back of Card"));
-		}
-	}*/
-
-/*	private void getCards(ArrayList<Card> cards){
-		if(cards.size() == 0){
-			Intent intent = new Intent(this, AddCardActivity.class);
-			startActivity(intent);
-		}
-	}*/
-	
+	//getter for card
 	public ArrayList<Card> getCards() {
 		return cards;
 	}
 
+	//getter for fragment
 	public ArrayList<CardFragment> getFragments() {
 		return fragments;
 	}
 
 	
 
+	//allow card to swipe back and forth 
 	private void getFragments(ArrayList<CardFragment> fragments) {
 		for(int i=0; i<cards.size(); ++i) {
 			fragments.add(CardFragment.newInstance(cards.get(i)));

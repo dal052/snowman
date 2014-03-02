@@ -10,16 +10,16 @@
     tools:context=".AddCardActivity" >
 
     <EditText
-        android:id="@+id/enter_description"
+        android:id="@+id/enter_front"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/enter_description" />
+        android:hint="@string/enter_front" />
     
     <EditText
-        android:id="@+id/enter_answer"
+        android:id="@+id/enter_back"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/enter_answer" />
+        android:hint="@string/enter_back" />
         
      <Button
         android:id="@+id/click_post"
