@@ -12,6 +12,7 @@ public class CardFragment extends Fragment {
 	private TextView text;
 	
 	private static final String CARD = "com.androidstudio.snowman.CARD";
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
