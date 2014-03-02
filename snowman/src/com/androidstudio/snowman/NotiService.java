@@ -3,6 +3,9 @@ package com.androidstudio.snowman;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import com.androidstudio.snowman.auxiliary.Card;
+
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.app.Dialog;
@@ -24,7 +27,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.androidstudio.snowman.aux.Card;
 import android.content.Intent;
 import android.app.Activity;
 
@@ -37,7 +39,6 @@ public class NotiService extends Service{
 	private Runnable notiService;	// runnable object
 	private int notiCounter;
 
-	MainActivity mainAct;
 	String mainName = "com.androidstudio.snowman.MainActivity";
 
 	@Override
@@ -72,7 +73,7 @@ public class NotiService extends Service{
 				}
 				// if the app is not on the foreground call showdialog.
 				if( onForeground() == false){
-					showDialog();
+//					showDialog();
 
 				}
 				// THIS IS THE PARAMTER call the freq method.

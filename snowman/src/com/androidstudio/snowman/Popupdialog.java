@@ -7,12 +7,8 @@ import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
-import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.androidstudio.snowman.aux.Card;
-import android.content.Intent;
 
 public class Popupdialog extends Activity {
 

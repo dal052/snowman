@@ -34,7 +34,6 @@ public class Popupdialog2 extends Activity {
 				if(event.getAction() == MotionEvent.ACTION_DOWN){
 					
 					// restart service at the end of finishing the popup
-					//startService(new Intent(Popupdialog2.this, NotiService.class));
 
 					finish();	// on touch exit the popup
 					return true;
