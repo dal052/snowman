@@ -8,6 +8,8 @@
         android:minSdkVersion="11"
         android:targetSdkVersion="18" />
 
+    <uses-permission android:name="android.permission.GET_TASKS" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -35,6 +37,24 @@
             android:name="com.androidstudio.snowman.AddCardActivity"
             android:label="@string/title_activity_add_card" >
         </activity>
+
+        <service
+            android:name="com.androidstudio.snowman.NotiService"
+            android:enabled="true" />
+        <!-- these two activities are for pop up text message back to back
+        answer and questions -->
+        <activity
+            android:name="com.androidstudio.snowman.Popupdialog"
+            android:label="@string/title_activity_popupdialog"
+            android:theme="@android:style/Theme.Dialog" >
+        </activity>
+        <activity
+            android:name="com.androidstudio.snowman.Popupdialog2"
+            android:label="@string/title_activity_popupdialog2" 
+            android:theme="@android:style/Theme.Dialog">
+        </activity>
+        <!-- Text message pop up activites -->
+        
     </application>
 
 </manifest>

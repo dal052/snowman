@@ -13,8 +13,12 @@
     <string name="title_activity_card_fragment">CardFragment</string>
 
     <string-array name="groups">
-        <item >Group 1</item>
-        <item >Group 2</item>
-        <item >Group 3</item>
+        <item>Group 1</item>
+        <item>Group 2</item>
+        <item>Group 3</item>
     </string-array>
+
+    <string name="title_activity_popupdialog">Popupdialog</string>
+    <string name="title_activity_popupdialog2">Popupdialog2</string>
+
 </resources>

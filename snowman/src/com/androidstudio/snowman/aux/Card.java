@@ -8,6 +8,26 @@ public class Card implements Parcelable {
 	private String front;
 	private String back;
 	private int id;
+	
+	private boolean print;
+
+	
+	private static Card instance;
+
+	/*
+	 * Get Singleton instance of this list.
+	 */
+	public static Card getInstance() {
+		if (instance == null) {
+			instance = new Card();
+		}
+
+		return instance;
+	}
+	
+	public void setPrint(boolean bool) {
+		this.print = bool;
+	}
 
 	public Card(String group, String front, String back) {
 		this.group = group;
