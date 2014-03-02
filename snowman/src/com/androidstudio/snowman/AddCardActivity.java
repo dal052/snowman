@@ -13,15 +13,11 @@ import android.view.View;
 import android.widget.EditText;
 
 public class AddCardActivity extends Activity {
-	private MainActivity mainActivity; 
-	private ArrayList<Card> cards;
-	private ArrayList<CardFragment> fragments;
-	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_add_card);	
+		setContentView(R.layout.activity_add_card);
 	}
 	
 	public void addCard(View view){
@@ -35,12 +31,7 @@ public class AddCardActivity extends Activity {
 			Card newCard = new Card("", cardAns.getText().toString(),
 					cardDesc.getText().toString());
 			MainActivity.cardhandler.createCard(newCard);
-			
-			cards = mainActivity.getCards();
-			cards.add(newCard);
-			fragments = mainActivity.getFragments();
-			fragments.add(CardFragment.newInstance(cards.get(cards.size()-1)));
-					
+			MainActivity.addNewCard = true;
 			break;
 		case R.id.click_cancel:
 			break;

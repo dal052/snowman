@@ -3,6 +3,7 @@ package com.androidstudio.snowman;
 import com.androidstudio.snowman.auxiliary.Card;
 import com.androidstudio.snowman.auxiliary.CardHandler;
 import com.androidstudio.snowman.auxiliary.PagerAdapter;
+
 import java.util.ArrayList;
 
 import android.content.Intent;
@@ -11,10 +12,15 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class MainActivity extends FragmentActivity {
+	public static CardHandler cardhandler;
+	public static boolean addNewCard = false;
+	
+	private static MainActivity instance;
 	private ViewPager pager;
 	private PagerAdapter adapter;
 	
@@ -25,14 +31,13 @@ public class MainActivity extends FragmentActivity {
 	private ArrayList<Card> cards;
 	private ArrayList<CardFragment> fragments;
 	
-	private int numberOfCards = 5;
 	
-	public static CardHandler cardhandler;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		instance = this;
 		
 		// Set things for drawer to work
 		groups = getResources().getStringArray(R.array.groups);
@@ -45,11 +50,11 @@ public class MainActivity extends FragmentActivity {
 		
 		cardhandler = new CardHandler(this);
 		cardhandler.open();
-		
+		/*
 		cardhandler.createCard(new Card("Group 1", "hahaha", "hohoho"));
 		cardhandler.createCard(new Card("Group 1", "hellehele", "hohoho"));
 		cardhandler.createCard(new Card("Group 1", "whowhwoho", "hohoho"));
-		
+		*/
 		// Set up list for cards
 		cards = cardhandler.getAllCards();
 		
@@ -61,6 +66,25 @@ public class MainActivity extends FragmentActivity {
 		pager = (ViewPager) findViewById(R.id.pager);
 		adapter = new PagerAdapter(this, fragments);
 		pager.setAdapter(adapter);
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		
+		if(addNewCard) {
+			Card newCard = cardhandler.lastCard();
+			cards.add(newCard);
+		
+			// add a new fragment
+			fragments.add(CardFragment.newInstance(newCard));
+			pager.getAdapter().notifyDataSetChanged();
+			
+			// set the current card to the new card
+			pager.setCurrentItem(fragments.size() -1);
+			
+			addNewCard = false;
+		}
 	}
 
 	@Override
@@ -105,4 +129,23 @@ public class MainActivity extends FragmentActivity {
 			fragments.add(CardFragment.newInstance(cards.get(i)));
 		}
 	}
+	
+	public static synchronized MainActivity getMainActivity() {
+		return instance;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle presses on the action bar items
+		switch (item.getItemId()) {
+		case(R.id.action_new):
+			Intent intent = new Intent(this, AddCardActivity.class);
+			startActivity(intent);
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
+	
+	
 }

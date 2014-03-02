@@ -64,6 +64,22 @@ public class CardHandler {
     return cards;
   }
 
+  
+  // return the last card in the database
+  public Card lastCard() {
+	  Cursor cursor = database.query(MySQLHelper.DATABASE_TABLE,
+		        allColumns, null, null, null, null, null);
+	  Card card = new Card();
+	  
+	  if(cursor.moveToLast() != false) {  
+		  card.setId(cursor.getInt(0));
+		  card.setFront(cursor.getString(1));
+		  card.setBack(cursor.getString(2));
+	  }
+	 
+	  return card;
+  }
+  
   //move cursor to the card to get certain card information
   private Card cursorToCard(Cursor cursor) {
     Card card = new Card();
