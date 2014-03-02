@@ -1,8 +1,11 @@
 package com.androidstudio.snowman;
 
 import com.androidstudio.snowman.auxiliary.Card;
+import com.androidstudio.snowman.auxiliary.CardHandler;
 import com.androidstudio.snowman.auxiliary.PagerAdapter;
 import java.util.ArrayList;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -22,7 +25,9 @@ public class MainActivity extends FragmentActivity {
 	private ArrayList<Card> cards;
 	private ArrayList<CardFragment> fragments;
 	
-	private final int numberOfCards = 500;
+	private int numberOfCards = 5;
+	
+	public static CardHandler cardhandler;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +43,15 @@ public class MainActivity extends FragmentActivity {
 		drawerList.setAdapter(new ArrayAdapter<String>(
 				this, android.R.layout.simple_list_item_1, groups));
 		
+		cardhandler = new CardHandler(this);
+		cardhandler.open();
+		
+		cardhandler.createCard(new Card("Group 1", "hahaha", "hohoho"));
+		cardhandler.createCard(new Card("Group 1", "hellehele", "hohoho"));
+		cardhandler.createCard(new Card("Group 1", "whowhwoho", "hohoho"));
+		
 		// Set up list for cards
-		cards = new ArrayList<Card>();
-		getCards(cards);
+		cards = cardhandler.getAllCards();
 		
 		// Set up list for fragments
 		fragments = new ArrayList<CardFragment>();
@@ -60,7 +71,7 @@ public class MainActivity extends FragmentActivity {
 	}
 
 	
-	private void getCards(ArrayList<Card> cards) {
+	/*private void getCards(ArrayList<Card> cards) {
 		for(int i=1; i<=numberOfCards; ++i) {
 			cards.add(new Card(
 					"Group 1", 
@@ -70,10 +81,27 @@ public class MainActivity extends FragmentActivity {
 							"fragment page is instantiated.\n",
 					"Back of Card"));
 		}
-	}
+	}*/
+
+/*	private void getCards(ArrayList<Card> cards){
+		if(cards.size() == 0){
+			Intent intent = new Intent(this, AddCardActivity.class);
+			startActivity(intent);
+		}
+	}*/
 	
+	public ArrayList<Card> getCards() {
+		return cards;
+	}
+
+	public ArrayList<CardFragment> getFragments() {
+		return fragments;
+	}
+
+	
+
 	private void getFragments(ArrayList<CardFragment> fragments) {
-		for(int i=0; i<numberOfCards; ++i) {
+		for(int i=0; i<cards.size(); ++i) {
 			fragments.add(CardFragment.newInstance(cards.get(i)));
 		}
 	}

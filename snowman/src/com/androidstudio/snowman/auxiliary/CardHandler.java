@@ -47,8 +47,8 @@ public class CardHandler {
   }
 
   //get lists of cards
-  public List<Card> getAllCards() {
-    List<Card> cards = new ArrayList<Card>();
+  public ArrayList<Card> getAllCards() {
+    ArrayList<Card> cards = new ArrayList<Card>();
 
     Cursor cursor = database.query(MySQLHelper.DATABASE_TABLE,
         allColumns, null, null, null, null, null);
