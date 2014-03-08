@@ -13,8 +13,8 @@
     <string name="hello_world">Hello Snowman</string>
     <string name="title_activity_add_card">AddCard</string>
     <string name="title_activity_card_fragment">CardFragment</string>
-	<string name="action_new">New Card</string>
-    
+    <string name="action_new">New Card</string>
+
     <string-array name="groups">
         <item>Group 1</item>
         <item>Group 2</item>
@@ -23,5 +23,6 @@
 
     <string name="title_activity_popupdialog">Popupdialog</string>
     <string name="title_activity_popupdialog2">Popupdialog2</string>
+    <string name="title_activity_frequencies">Frequencies</string>
 
 </resources>

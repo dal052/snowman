@@ -33,7 +33,7 @@ public class AddCardActivity extends Activity {
 			break;
 		case R.id.click_cancel:
 			break;
-		}		
+		}	
 		finish();		
 	}
 
