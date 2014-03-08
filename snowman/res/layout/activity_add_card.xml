@@ -8,7 +8,9 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".AddCardActivity" 
-    android:icon="@drawable/studybuddy">
+    android:icon="@drawable/studybuddy"
+    android:background="#D3D3D3"
+    >
 
     <EditText
         android:id="@+id/enter_front"
@@ -24,15 +26,15 @@
 
     <Button
         android:id="@+id/click_post"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150px"
+        android:layout_height="60px"
         android:onClick="addCard"
         android:text="@string/click_post" />
 
     <Button
         android:id="@+id/click_cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150px"
+        android:layout_height="60px"
         android:onClick="addCard"
         android:text="@string/click_cancel" />
 

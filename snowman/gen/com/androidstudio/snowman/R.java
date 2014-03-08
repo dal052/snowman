@@ -31,10 +31,11 @@ public final class R {
         public static final int aslogo=0x7f020000;
         public static final int ic_action_new=0x7f020001;
         public static final int ic_launcher=0x7f020002;
-        public static final int study_buddy_icon=0x7f020003;
-        public static final int study_buddy_icon1=0x7f020004;
-        public static final int studybuddy=0x7f020005;
-        public static final int studybuddy2=0x7f020006;
+        public static final int noobjohn=0x7f020003;
+        public static final int study_buddy_icon=0x7f020004;
+        public static final int study_buddy_icon1=0x7f020005;
+        public static final int studybuddy=0x7f020006;
+        public static final int studybuddy2=0x7f020007;
     }
     public static final class id {
         public static final int action_new=0x7f0a000c;
@@ -109,5 +110,6 @@ public final class R {
          */
         public static final int AppTheme=0x7f080001;
         public static final int Holo=0x7f080002;
+        public static final int NewDialog=0x7f080003;
     }
 }

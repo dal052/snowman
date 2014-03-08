@@ -18,4 +18,12 @@
     </style>
 
     <style name="Holo">android:style/Theme.Holo</style>
+    
+    <style name="NewDialog" parent="@android:style/Theme.Dialog">
+    
+      <item name = "android:windowBackground">@android:color/transparent</item>    
+    
+    </style>
+    
+    
 </resources>

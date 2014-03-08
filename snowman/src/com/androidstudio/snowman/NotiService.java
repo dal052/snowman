@@ -32,7 +32,7 @@ import android.app.Activity;
 
 
 public class NotiService extends Service{
-
+	
 	private List<Card> cards;
 	private ArrayList<Card> cardList;
 	private Handler handler = new Handler(); // handler object
@@ -44,18 +44,19 @@ public class NotiService extends Service{
 	@Override
 	public IBinder onBind(Intent intent) {
 		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	public void onCreate(){
-
+		
 		// toast is for test, but will use for notification on or off.
 		Toast toast = Toast.makeText(getApplicationContext(), topAct(), Toast.LENGTH_LONG);
 		toast.show();
 
 		// instantiate runnable
 		notiService = new Runnable(){
-
+			
 			@Override
 			/** Run the service. check for foreground, 
 			 *  either status noti or pop up depend on foreground.
@@ -77,7 +78,7 @@ public class NotiService extends Service{
 							}	
 							// on finish repost the place it. 
 							public void onFinish() {
-								generateNotification(getApplicationContext(), "FUCK ANDROID", notiCounter);										
+								//generateNotification(getApplicationContext(), "FUCK ANDROID", notiCounter);										
 							}
 						}.start();
 					}
@@ -85,7 +86,7 @@ public class NotiService extends Service{
 				// if the app is not on the foreground call showdialog.
 				if( onForeground() == false){
 					
-					showDialog();
+					//showDialog();
 
 				}
 				// THIS IS THE PARAMTER call the freq method.
@@ -138,7 +139,8 @@ public class NotiService extends Service{
 	 * This method calls an dialog theme activity when the app is minimized
 	 * It will have question and answers 
 	 */
-	private void showDialog(){		
+	private void showDialog(){	
+		
 		// create intent to start the popupdialog activity class
 		Intent resInt = new Intent(this, Popupdialog.class);
 		resInt.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -153,6 +155,7 @@ public class NotiService extends Service{
 	 * @param text
 	 */
 	private void generateNotification(Context context, String message, int number) {
+
 		int icon = R.drawable.study_buddy_icon1; // set icon 
 		long when = System.currentTimeMillis(); // current time.
 
@@ -160,6 +163,7 @@ public class NotiService extends Service{
 		// instatiate notification manager
 		NotificationManager notificationManager = (NotificationManager) context
 				.getSystemService(Context.NOTIFICATION_SERVICE);
+		
 
 
 		// create the notification with icon, message, and time stamp.
