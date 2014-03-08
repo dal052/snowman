@@ -19,7 +19,12 @@ import android.widget.ListView;
 
 public class MainActivity extends FragmentActivity {
 	public static CardHandler cardhandler;
+<<<<<<< HEAD
 	public static boolean changeInDatabase = false;
+=======
+	public static boolean addNewCard = false;
+	final public static String CURRENTGROUP = "com.androidstudio.snowman.MainActivity.CURRENTGROUP";
+>>>>>>> d89bf72af7708ee1b437740cd26713ec731bc86c
 	
 	private static MainActivity instance;
 	private ViewPager pager;
@@ -28,6 +33,7 @@ public class MainActivity extends FragmentActivity {
 	private String[] groups;
 	private DrawerLayout drawer;
 	private ListView drawerList;
+	private String currentGroup;
 	
 	private ArrayList<Card> cards;
 	private ArrayList<CardFragment> fragments;
@@ -44,14 +50,13 @@ public class MainActivity extends FragmentActivity {
 		groups = getResources().getStringArray(R.array.groups);
 		drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 		drawerList = (ListView) findViewById(R.id.left_drawer);
+		currentGroup = groups[1];
 		
 		// Set up adapter for ListView
 		drawerList.setAdapter(new ArrayAdapter<String>(
 				this, android.R.layout.simple_list_item_1, groups));
 		drawerList.setOnItemClickListener(new DrawerItemClickListener(this, drawerList, drawer));
 		
-		cardhandler = new CardHandler(this);
-		cardhandler.open();
 
 		//get cardhandler to store in data base
 		cardhandler = new CardHandler(this);
@@ -59,7 +64,8 @@ public class MainActivity extends FragmentActivity {
 
 
 		// Set up list for cards
-		cards = cardhandler.getAllCards();
+		cards = cardhandler.getGroupCards(currentGroup);
+//		cards = cardhandler.getAllCards();
 		
 		// Set up list for fragments
 		fragments = new ArrayList<CardFragment>();
@@ -102,53 +108,26 @@ public class MainActivity extends FragmentActivity {
 		return true;
 	}
 
-	
-	/*private void getCards(ArrayList<Card> cards) {
-		for(int i=1; i<=numberOfCards; ++i) {
-			cards.add(new Card(
-					"Group 1", 
-					"Card " + i + "\nUsing this approach, you need to keep track of the string tags " +
-							"and associate them with all the fragment pages. You could use a map to store " +
-							"each tag along with the current page index, which is set at the time when the " +
-							"fragment page is instantiated.\n",
-					"Back of Card"));
-		}
-	}*/
-
-/*	private void getCards(ArrayList<Card> cards){
-		if(cards.size() == 0){
-			Intent intent = new Intent(this, AddCardActivity.class);
-			startActivity(intent);
-		}
-	}*/
-	
-
-
 	//getter for card
-
 	public ArrayList<Card> getCards() {
 		return cards;
 	}
-
-
-
-	
-
 
 	//getter for fragment
 	public ArrayList<CardFragment> getFragments() {
 		return fragments;
 	}
 
+<<<<<<< HEAD
 	
+=======
+>>>>>>> d89bf72af7708ee1b437740cd26713ec731bc86c
 	//allow card to swipe back and forth 
 	private void getFragments(ArrayList<CardFragment> fragments) {
 		for(int i=0; i<cards.size(); ++i) {
 			fragments.add(CardFragment.newInstance(cards.get(i)));
 		}
-	}
-	
-	
+	}	
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -156,6 +135,7 @@ public class MainActivity extends FragmentActivity {
 		switch (item.getItemId()) {
 		case(R.id.action_new):
 			Intent intent = new Intent(this, AddCardActivity.class);
+			intent.putExtra(CURRENTGROUP, currentGroup);
 			startActivity(intent);
 			return true;
 		}
