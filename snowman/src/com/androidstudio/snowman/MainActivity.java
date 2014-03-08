@@ -19,12 +19,9 @@ import android.widget.ListView;
 
 public class MainActivity extends FragmentActivity {
 	public static CardHandler cardhandler;
-<<<<<<< HEAD
 	public static boolean changeInDatabase = false;
-=======
 	public static boolean addNewCard = false;
 	final public static String CURRENTGROUP = "com.androidstudio.snowman.MainActivity.CURRENTGROUP";
->>>>>>> d89bf72af7708ee1b437740cd26713ec731bc86c
 	
 	private static MainActivity instance;
 	private ViewPager pager;
@@ -118,10 +115,7 @@ public class MainActivity extends FragmentActivity {
 		return fragments;
 	}
 
-<<<<<<< HEAD
-	
-=======
->>>>>>> d89bf72af7708ee1b437740cd26713ec731bc86c
+
 	//allow card to swipe back and forth 
 	private void getFragments(ArrayList<CardFragment> fragments) {
 		for(int i=0; i<cards.size(); ++i) {
