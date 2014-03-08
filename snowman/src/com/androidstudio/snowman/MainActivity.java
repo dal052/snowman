@@ -2,6 +2,7 @@ package com.androidstudio.snowman;
 
 import com.androidstudio.snowman.auxiliary.Card;
 import com.androidstudio.snowman.auxiliary.CardHandler;
+import com.androidstudio.snowman.auxiliary.DrawerItemClickListener;
 import com.androidstudio.snowman.auxiliary.PagerAdapter;
 
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ import android.widget.ListView;
 
 public class MainActivity extends FragmentActivity {
 	public static CardHandler cardhandler;
-	public static boolean addNewCard = false;
+	public static boolean changeInDatabase = false;
 	
 	private static MainActivity instance;
 	private ViewPager pager;
@@ -47,6 +48,7 @@ public class MainActivity extends FragmentActivity {
 		// Set up adapter for ListView
 		drawerList.setAdapter(new ArrayAdapter<String>(
 				this, android.R.layout.simple_list_item_1, groups));
+		drawerList.setOnItemClickListener(new DrawerItemClickListener(this, drawerList, drawer));
 		
 		cardhandler = new CardHandler(this);
 		cardhandler.open();
@@ -77,7 +79,7 @@ public class MainActivity extends FragmentActivity {
 	protected void onResume() {
 		super.onResume();
 		
-		if(addNewCard) {
+		if(changeInDatabase) {
 			Card newCard = cardhandler.lastCard();
 			cards.add(newCard);
 		
@@ -88,7 +90,7 @@ public class MainActivity extends FragmentActivity {
 			// set the current card to the new card
 			pager.setCurrentItem(fragments.size() - 1);
 			
-			addNewCard = false;
+			changeInDatabase = false;
 		}
 	}
 
@@ -139,8 +141,6 @@ public class MainActivity extends FragmentActivity {
 	}
 
 	
-
-
 	//allow card to swipe back and forth 
 	private void getFragments(ArrayList<CardFragment> fragments) {
 		for(int i=0; i<cards.size(); ++i) {

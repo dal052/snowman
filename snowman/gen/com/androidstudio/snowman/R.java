@@ -38,8 +38,8 @@ public final class R {
         public static final int studybuddy2=0x7f020007;
     }
     public static final class id {
-        public static final int action_new=0x7f0a000c;
-        public static final int action_settings=0x7f0a000b;
+        public static final int action_new=0x7f0a000d;
+        public static final int action_settings=0x7f0a000c;
         public static final int click_cancel=0x7f0a0003;
         public static final int click_post=0x7f0a0002;
         public static final int drawer_layout=0x7f0a0004;
@@ -47,6 +47,7 @@ public final class R {
         public static final int enter_front=0x7f0a0000;
         public static final int fullView=0x7f0a0007;
         public static final int fullView2=0x7f0a0009;
+        public static final int gridview=0x7f0a000b;
         public static final int left_drawer=0x7f0a0006;
         public static final int pager=0x7f0a0005;
         public static final int text=0x7f0a0008;
@@ -59,6 +60,7 @@ public final class R {
         public static final int activity_popupdialog2=0x7f030003;
         public static final int aslogo=0x7f030004;
         public static final int card_fragment=0x7f030005;
+        public static final int viewcards_grid=0x7f030006;
     }
     public static final class menu {
         public static final int add_card=0x7f090000;

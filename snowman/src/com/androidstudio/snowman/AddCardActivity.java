@@ -25,7 +25,7 @@ public class AddCardActivity extends Activity {
 			Card newCard = new Card("", cardBack.getText().toString(),
 					cardFront.getText().toString());
 			MainActivity.cardhandler.createCard(newCard);
-			MainActivity.addNewCard = true;
+			MainActivity.changeInDatabase = true;
 			break;
 		case R.id.click_cancel:
 			break;
