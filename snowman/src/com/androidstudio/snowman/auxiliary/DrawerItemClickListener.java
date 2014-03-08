@@ -33,7 +33,7 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener {
 	    // regenerate fragments in main activiy
 	    
 	    // Change the layout of the main activity
-	    main.setContentView(R.layout.activity_add_card);
+	    main.setContentView(main.getGridview());
 	    
 	    // Close the drawer
 	    drawer.closeDrawer(list);
