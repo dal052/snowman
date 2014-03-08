@@ -19,6 +19,7 @@ import android.widget.ListView;
 public class MainActivity extends FragmentActivity {
 	public static CardHandler cardhandler;
 	public static boolean addNewCard = false;
+	final public static String CURRENTGROUP = "com.androidstudio.snowman.MainActivity.CURRENTGROUP";
 	
 	private static MainActivity instance;
 	private ViewPager pager;
@@ -44,7 +45,7 @@ public class MainActivity extends FragmentActivity {
 		groups = getResources().getStringArray(R.array.groups);
 		drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 		drawerList = (ListView) findViewById(R.id.left_drawer);
-		currentGroup = groups[0];
+		currentGroup = groups[1];
 		
 		// Set up adapter for ListView
 		drawerList.setAdapter(new ArrayAdapter<String>(
@@ -58,6 +59,7 @@ public class MainActivity extends FragmentActivity {
 
 		// Set up list for cards
 		cards = cardhandler.getGroupCards(currentGroup);
+//		cards = cardhandler.getAllCards();
 		
 		// Set up list for fragments
 		fragments = new ArrayList<CardFragment>();
@@ -123,6 +125,7 @@ public class MainActivity extends FragmentActivity {
 		switch (item.getItemId()) {
 		case(R.id.action_new):
 			Intent intent = new Intent(this, AddCardActivity.class);
+			intent.putExtra(CURRENTGROUP, currentGroup);
 			startActivity(intent);
 			return true;
 		}

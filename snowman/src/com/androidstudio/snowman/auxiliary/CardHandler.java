@@ -75,7 +75,7 @@ public class CardHandler {
 	  cursor.moveToFirst();
 	  while(!cursor.isAfterLast()) {
 		  Card card = cursorToCard(cursor);
-		  if(card.getGroup() == group){
+		  if(card.getGroup().equals(group)){
 			  cards.add(card);
 		  }
 		  cursor.moveToNext();
