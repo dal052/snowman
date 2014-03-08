@@ -1,6 +1,7 @@
 package com.androidstudio.snowman;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MotionEvent;
@@ -38,6 +39,8 @@ public class Popupdialog2 extends Activity {
 					// restart service at the end of finishing the popup
 
 					finish();	// on touch exit the popup
+					
+
 					return true;
 				}
 				return false;

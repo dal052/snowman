@@ -23,6 +23,9 @@ public class Popupdialog extends Activity {
 
 		// initialize my activity to the view to use in the listener
 		TextView text = (TextView) findViewById(R.id.text);
+		
+		// stop service
+		stopService(new Intent(Popupdialog.this, NotiService.class));
 	
 		
 		// start the touch listener 
@@ -35,8 +38,7 @@ public class Popupdialog extends Activity {
 						// intent to switch between to next activity
 					Intent resInt = new Intent(Popupdialog.this, Popupdialog2.class);	
 					
-					// stop service
-					stopService(new Intent(Popupdialog.this, NotiService.class));
+					
 
 					finish();	// finish the first activity while flipping.	
 					startActivity(resInt); // start the next activity.

@@ -25,6 +25,7 @@ public class MainActivity extends FragmentActivity {
 	public static boolean changeInDatabase = false;
 	public static boolean addNewCard = false;
 	final public static String CURRENTGROUP = "com.androidstudio.snowman.MainActivity.CURRENTGROUP";
+	private static boolean firstOpen = true;
 
 	private static MainActivity instance;
 	private ViewPager pager;
@@ -48,13 +49,19 @@ public class MainActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+
 		// get layout that is used for gridview
 		gridview = getLayoutInflater().inflate(R.layout.viewcards_grid, null);
 
 		// splash screen
-		Intent splash = new Intent(this, SplashActivity.class);
-		startActivity(splash);
-
+		if(firstOpen){
+			Intent splash = new Intent(this, SplashActivity.class);
+			startActivity(splash);
+			// start service
+			startService(new Intent(this, NotiService.class));
+			firstOpen=false;
+		}
+		
 		// Set things for drawer to work
 		groups = getResources().getStringArray(R.array.groups);
 		currentGroup = groups[0];
@@ -92,8 +99,7 @@ public class MainActivity extends FragmentActivity {
 		gridViewOfCards.setAdapter(new GridViewAdapter(this, cards));
 
 
-		// start service
-		startService(new Intent(this, NotiService.class));
+
 	}
 
 	@Override
