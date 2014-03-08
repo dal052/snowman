@@ -22,8 +22,8 @@ public class AddCardActivity extends Activity {
 		//add card to database and show on screen based on clicked button
 		switch(view.getId()){
 		case R.id.click_post:
-			Card newCard = new Card("", cardBack.getText().toString(),
-					cardFront.getText().toString());
+			Card newCard = new Card("", cardFront.getText().toString(),
+					cardBack.getText().toString());
 			MainActivity.cardhandler.createCard(newCard);
 			MainActivity.addNewCard = true;
 			break;
