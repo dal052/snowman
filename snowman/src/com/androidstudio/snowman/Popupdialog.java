@@ -15,6 +15,8 @@ public class Popupdialog extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+
 		setContentView(R.layout.activity_popupdialog);
 		// initialize my activity to the view to use in the listener
 		TextView text = (TextView) findViewById(R.id.text);

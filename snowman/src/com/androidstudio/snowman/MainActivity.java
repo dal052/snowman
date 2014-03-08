@@ -155,7 +155,7 @@ public class MainActivity extends FragmentActivity {
 		// Handle presses on the action bar items
 		switch (item.getItemId()) {
 		case(R.id.action_new):
-			Intent intent = new Intent(this, AddCardActivity.class);
+			Intent intent = new Intent(this, Frequencies.class);
 			startActivity(intent);
 			return true;
 		}
