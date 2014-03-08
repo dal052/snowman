@@ -17,6 +17,7 @@
         android:icon="@drawable/sbbox"
         android:label="@string/app_name"
         android:theme="@style/Holo" >
+        
         <activity
             android:name="com.androidstudio.snowman.SplashActivity"
             android:label="@string/app_name" >
