@@ -41,6 +41,9 @@ public class MainActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		Intent splash = new Intent(this, SplashActivity.class);
+		startActivity(splash);
 
 		
 		// Set things for drawer to work

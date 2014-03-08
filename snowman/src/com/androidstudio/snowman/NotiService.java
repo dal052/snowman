@@ -25,7 +25,7 @@ public class NotiService extends Service{
 	private Runnable notiService;	// runnable object
 	private int notiCounter;
 	Frequencies free; 
-	private long freqs; 
+	private long freqs = 8000; 
 
 	String mainName = "com.androidstudio.snowman.MainActivity";
 
@@ -57,7 +57,7 @@ public class NotiService extends Service{
 				// TODO Auto-generated method stub
 				
 				free = new Frequencies();
-				freqs = free.calculateRate();
+//				freqs = free.calculateRate();
 
 				// status bar noti if app is on foreground
 				if( onForeground() == true){ // check if app is on foreground
@@ -82,7 +82,7 @@ public class NotiService extends Service{
 				// if the app is not on the foreground call showdialog.
 				if( onForeground() == false){
 					
-					//showDialog();
+					showDialog();
 
 				}
 				// THIS IS THE PARAMTER call the freq method.
@@ -152,7 +152,7 @@ public class NotiService extends Service{
 	 */
 	private void generateNotification(Context context, String message, int number) {
 
-		int icon = R.drawable.study_buddy_icon1; // set icon 
+		int icon = R.drawable.sbbox; // set icon 
 		long when = System.currentTimeMillis(); // current time.
 
 

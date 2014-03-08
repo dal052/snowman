@@ -1,13 +1,12 @@
 package com.androidstudio.snowman;
 
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.Context;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
+import android.view.Window;
 import android.widget.TextView;
 
 
@@ -16,8 +15,12 @@ public class Popupdialog extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-
+		// set icon for popup
+		requestWindowFeature(Window.FEATURE_LEFT_ICON);
 		setContentView(R.layout.activity_popupdialog);
+		// set icon for popup
+		getWindow().setFeatureDrawableResource(Window.FEATURE_LEFT_ICON, R.drawable.sbbox);
+
 		// initialize my activity to the view to use in the listener
 		TextView text = (TextView) findViewById(R.id.text);
 	

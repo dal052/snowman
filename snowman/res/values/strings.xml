@@ -21,8 +21,8 @@
         <item>Group 3</item>
     </string-array>
 
-    <string name="title_activity_popupdialog">Popupdialog</string>
-    <string name="title_activity_popupdialog2">Popupdialog2</string>
+    <string name="title_activity_popupdialog">Study!</string>
+    <string name="title_activity_popupdialog2">Buddy!</string>
     <string name="title_activity_frequencies">Frequencies</string>
 
 </resources>
