@@ -15,9 +15,9 @@ import android.util.Log;
 
 public class MySQLHelper extends SQLiteOpenHelper {
 	public static final String CARD_ID = "_id";
-    public static final String CARD_ANS = "answer";
-    public static final String CARD_DESC = "description";
-
+    public static final String CARD_FRONT = "front";
+    public static final String CARD_BACK = "back";
+    public static final String CARD_GROUP = "_group";
 
 	public static final String DATABASE_NAME = "card.db";
 	public static final String DATABASE_TABLE = "Card";
@@ -27,8 +27,9 @@ public class MySQLHelper extends SQLiteOpenHelper {
 	public static final String DATABASE_CREATE = 
 		"CREATE TABLE " + DATABASE_TABLE + " ("
 	    + CARD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-	    + CARD_ANS + " TEXT NOT NULL, "
-        + CARD_DESC + " TEXT NOT NULL);";
+	    + CARD_FRONT + " TEXT NOT NULL, "
+        + CARD_BACK + " TEXT NOT NULL, "
+        + CARD_GROUP + " TEXT NOT NULL );";
 
 	public MySQLHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
