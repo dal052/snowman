@@ -3,7 +3,6 @@ package com.androidstudio.snowman;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
 import android.app.ActivityManager;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -19,7 +18,7 @@ import android.widget.Toast;
 import com.androidstudio.snowman.auxiliary.Card;
 
 public class NotiService extends Service{
-
+	
 	private List<Card> cards;
 	private ArrayList<Card> cardList;
 	private Handler handler = new Handler(); // handler object
@@ -33,6 +32,7 @@ public class NotiService extends Service{
 	@Override
 	public IBinder onBind(Intent intent) {
 		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
@@ -41,8 +41,7 @@ public class NotiService extends Service{
 //		freq = new Frequencies();
 //		freqs = freq.calculateRate();
 
-
-		// toast is for test, but will use for notification on or off.
+// 		toast is for test, but will use for notification on or off.
 //		Toast toast = Toast.makeText(getApplicationContext(), Long.toString(freqs), Toast.LENGTH_SHORT);
 //		toast.show();
 
@@ -83,7 +82,7 @@ public class NotiService extends Service{
 				// if the app is not on the foreground call showdialog.
 				if( onForeground() == false){
 					
-					showDialog();
+					//showDialog();
 
 				}
 				// THIS IS THE PARAMTER call the freq method.
@@ -136,7 +135,8 @@ public class NotiService extends Service{
 	 * This method calls an dialog theme activity when the app is minimized
 	 * It will have question and answers 
 	 */
-	private void showDialog(){		
+	private void showDialog(){	
+		
 		// create intent to start the popupdialog activity class
 		Intent resInt = new Intent(this, Popupdialog.class);
 		resInt.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -151,6 +151,7 @@ public class NotiService extends Service{
 	 * @param text
 	 */
 	private void generateNotification(Context context, String message, int number) {
+
 		int icon = R.drawable.study_buddy_icon1; // set icon 
 		long when = System.currentTimeMillis(); // current time.
 
@@ -158,6 +159,7 @@ public class NotiService extends Service{
 		// instatiate notification manager
 		NotificationManager notificationManager = (NotificationManager) context
 				.getSystemService(Context.NOTIFICATION_SERVICE);
+		
 
 
 		// create the notification with icon, message, and time stamp.

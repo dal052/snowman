@@ -7,12 +7,15 @@
     android:clickable="true"
     android:focusable="true"
     android:focusableInTouchMode="true" 
-	android:icon="@drawable/studybuddy">
+	android:icon="@drawable/studybuddy"
+	android:background="#FFFFFF"
+	>
 
     <TextView
         android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textColor="#FFF" 
-        android:text="Page 1"/>
+        android:text="Page 1"
+    />
 </RelativeLayout>

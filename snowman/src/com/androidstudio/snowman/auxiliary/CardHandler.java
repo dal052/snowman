@@ -15,8 +15,9 @@ public class CardHandler {
   private SQLiteDatabase database;
   private MySQLHelper dbHelper;
   private String[] allColumns = { MySQLHelper.CARD_ID,
-      MySQLHelper.CARD_ANS, 
-      MySQLHelper.CARD_DESC };
+      MySQLHelper.CARD_FRONT, 
+      MySQLHelper.CARD_BACK, 
+      MySQLHelper.CARD_GROUP };
 
   public CardHandler(Context context) {
     dbHelper = new MySQLHelper(context);
@@ -33,8 +34,9 @@ public class CardHandler {
   //create new card
   public void createCard(Card card) {
     ContentValues values = new ContentValues();
-    values.put(MySQLHelper.CARD_ANS, card.getFront());
-    values.put(MySQLHelper.CARD_DESC, card.getBack());
+    values.put(MySQLHelper.CARD_FRONT, card.getFront());
+    values.put(MySQLHelper.CARD_BACK, card.getBack());
+    values.put(MySQLHelper.CARD_GROUP, card.getGroup());
     database.insert(MySQLHelper.DATABASE_TABLE, null, values);
   }
 
@@ -43,7 +45,7 @@ public class CardHandler {
     long id = card.getId();
     System.out.println("Comment deleted with id: " + id);
     database.delete(MySQLHelper.DATABASE_TABLE, MySQLHelper.CARD_ID
-        + " = " + id, null);
+        + " ='" + id +"'", null);
   }
 
   //get lists of cards
@@ -64,6 +66,23 @@ public class CardHandler {
     return cards;
   }
 
+  public ArrayList<Card> getGroupCards(String group) {
+	  ArrayList<Card> cards = new ArrayList<Card>();
+	  
+	  Cursor cursor = database.query(MySQLHelper.DATABASE_TABLE, 
+			  allColumns, null, null, null, null, null);
+	  
+	  cursor.moveToFirst();
+	  while(!cursor.isAfterLast()) {
+		  Card card = cursorToCard(cursor);
+		  if(card.getGroup().equals(group)){
+			  cards.add(card);
+		  }
+		  cursor.moveToNext();
+	  }
+	  cursor.close();
+	  return cards;
+  }
   
   // return the last card in the database
   public Card lastCard() {
@@ -86,6 +105,7 @@ public class CardHandler {
     card.setId(cursor.getInt(0));
     card.setFront(cursor.getString(1));
     card.setBack(cursor.getString(2));
+    card.setGroup(cursor.getString(3));
     return card;
   }
 } 

@@ -8,32 +8,58 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".AddCardActivity" 
-    android:icon="@drawable/studybuddy">
-
+    android:icon="@drawable/studybuddy"
+    android:background="#D3D3D3"
+    >
+	
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/front"
+        android:textColor="#000000" 
+        android:textSize="20sp"/>
+	
     <EditText
         android:id="@+id/enter_front"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
+        android:gravity="top"
         android:hint="@string/enter_front" />
-    
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/back"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
     <EditText
         android:id="@+id/enter_back"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/enter_back" />
 
-    <Button
-        android:id="@+id/click_post"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="addCard"
-        android:text="@string/click_post" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal" >
 
-    <Button
-        android:id="@+id/click_cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="addCard"
-        android:text="@string/click_cancel" />
+        <Button
+            android:id="@+id/click_cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="addCard"
+            android:text="@string/click_cancel"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/click_post"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:onClick="addCard"
+            android:text="@string/click_post"
+            android:layout_weight="1" />
+    </LinearLayout>
 
 </LinearLayout>

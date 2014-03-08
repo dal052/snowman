@@ -1,18 +1,21 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".CardFragment" >
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#D3D3D3"
+     >
 
     <TextView
         android:id="@+id/text"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="430px"
         android:layout_gravity="center"
         android:padding="16dp"
 		android:textSize="25sp"
         android:lineSpacingMultiplier="1.2"
         android:gravity="center"
-        android:text="@string/hello_world" />
+        android:text="@string/hello_world" 
+        android:textColor="#000000"
+        android:background="#FFFFFF"
+        />
 
-</LinearLayout>
+</ScrollView>
