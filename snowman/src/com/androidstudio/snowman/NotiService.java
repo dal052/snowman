@@ -1,35 +1,21 @@
 package com.androidstudio.snowman;
 
 import java.util.ArrayList;
-
 import java.util.List;
 import java.util.Random;
-
-import com.androidstudio.snowman.auxiliary.Card;
-import android.annotation.SuppressLint;
 import android.app.ActivityManager;
-import android.app.Dialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.IBinder;
-import android.support.v4.app.NotificationCompat;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
-import android.content.Intent;
-import android.app.Activity;
 
+import com.androidstudio.snowman.auxiliary.Card;
 
 public class NotiService extends Service{
 	
@@ -38,6 +24,8 @@ public class NotiService extends Service{
 	private Handler handler = new Handler(); // handler object
 	private Runnable notiService;	// runnable object
 	private int notiCounter;
+	Frequencies free; 
+	private long freqs = 8000; 
 
 	String mainName = "com.androidstudio.snowman.MainActivity";
 
@@ -50,19 +38,26 @@ public class NotiService extends Service{
 
 	public void onCreate(){
 		
-		// toast is for test, but will use for notification on or off.
-		Toast toast = Toast.makeText(getApplicationContext(), topAct(), Toast.LENGTH_LONG);
-		toast.show();
+//		freq = new Frequencies();
+//		freqs = freq.calculateRate();
+
+// 		toast is for test, but will use for notification on or off.
+//		Toast toast = Toast.makeText(getApplicationContext(), Long.toString(freqs), Toast.LENGTH_SHORT);
+//		toast.show();
 
 		// instantiate runnable
 		notiService = new Runnable(){
 			
+		
 			@Override
 			/** Run the service. check for foreground, 
 			 *  either status noti or pop up depend on foreground.
 			 */
 			public void run() {
 				// TODO Auto-generated method stub
+				
+				free = new Frequencies();
+//				freqs = free.calculateRate();
 
 				// status bar noti if app is on foreground
 				if( onForeground() == true){ // check if app is on foreground
@@ -71,14 +66,15 @@ public class NotiService extends Service{
 						// call notification method
 						
 						// wait on the status noti after starting app.
-						new CountDownTimer(5000, 5000) {
+						new CountDownTimer(freqs, freqs) {
 							// on tick the pulled down will go back to active
 							public void onTick(long millisUntilFinished) {
 								// nothing need here.
 							}	
 							// on finish repost the place it. 
 							public void onFinish() {
-								//generateNotification(getApplicationContext(), "FUCK ANDROID", notiCounter);										
+								generateNotification(getApplicationContext(), "FUCK ANDROID", notiCounter);		
+								
 							}
 						}.start();
 					}
@@ -86,11 +82,11 @@ public class NotiService extends Service{
 				// if the app is not on the foreground call showdialog.
 				if( onForeground() == false){
 					
-					//showDialog();
+					showDialog();
 
 				}
 				// THIS IS THE PARAMTER call the freq method.
-				handler.postDelayed(notiService, 20000);	
+				handler.postDelayed(notiService, freqs);	
 			}
 		};		
 	}
@@ -156,7 +152,7 @@ public class NotiService extends Service{
 	 */
 	private void generateNotification(Context context, String message, int number) {
 
-		int icon = R.drawable.study_buddy_icon1; // set icon 
+		int icon = R.drawable.sbbox; // set icon 
 		long when = System.currentTimeMillis(); // current time.
 
 

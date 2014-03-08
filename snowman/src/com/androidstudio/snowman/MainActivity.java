@@ -47,8 +47,14 @@ public class MainActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
+		// get layout that is used for gridview
 		gridview = getLayoutInflater().inflate(R.layout.viewcards_grid, null);
-	
+
+		// splash screen
+		Intent splash = new Intent(this, SplashActivity.class);
+		startActivity(splash);
+
 		// Set things for drawer to work
 		groups = getResources().getStringArray(R.array.groups);
 		currentGroup = groups[0];
@@ -145,6 +151,7 @@ public class MainActivity extends FragmentActivity {
 		// Handle presses on the action bar items
 		switch (item.getItemId()) {
 		case(R.id.action_new):
+
 			Intent intent = new Intent(this, AddCardActivity.class);
 		intent.putExtra(CURRENTGROUP, currentGroup);
 		startActivity(intent);

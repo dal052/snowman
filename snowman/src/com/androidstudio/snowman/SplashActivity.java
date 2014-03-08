@@ -10,7 +10,7 @@ import android.view.WindowManager;
 public class SplashActivity extends Activity {
 
 	private static String TAG = SplashActivity.class.getName();
-	private static long SLEEP_TIME = 2; // Sleep for some time
+	private static long SLEEP_TIME = 4; // Sleep for some time
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,15 +36,13 @@ public class SplashActivity extends Activity {
 		public void run() {
 			try {
 				// Sleeping
-				Thread.sleep(SLEEP_TIME * 500);
+				Thread.sleep(SLEEP_TIME * 1000);
 			} catch (Exception e) {
 				Log.e(TAG, e.getMessage());
 			}
 
 			// Start main activity
 			
-			Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-			SplashActivity.this.startActivity(intent);
 			SplashActivity.this.finish();
 			
 		}

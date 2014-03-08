@@ -7,7 +7,7 @@
     android:clickable="true"
     android:focusable="true"
     android:focusableInTouchMode="true" 
-	android:icon="@drawable/studybuddy"
+	android:icon="@drawable/sblogobox"
 	android:background="#FFFFFF"
 	>
 
