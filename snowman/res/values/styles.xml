@@ -5,6 +5,7 @@
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
     <style name="AppBaseTheme" parent="android:Theme.Light">
+        <item name="android:background">@drawable/noobjohn</item>
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
@@ -14,6 +15,8 @@
 
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
+        <item name="android:background">@drawable/noobjohn</item>
+
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
@@ -33,7 +36,9 @@
     </style>
 
     <style name="Holo">android:style/Theme.Holo</style>
-
-   
-
+    
+    <style name="CustomTheme" parent="android:Theme">
+        <item name="android:windowNoTitle">false</item>
+    </style>
+    
 </resources>

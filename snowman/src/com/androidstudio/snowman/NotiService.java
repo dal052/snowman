@@ -26,6 +26,7 @@ public class NotiService extends Service{
 	private int notiCounter;
 	Frequencies free; 
 	private long freqs = 8000; 
+	MainActivity mainActivity;
 
 	String mainName = "com.androidstudio.snowman.MainActivity";
 
@@ -37,9 +38,7 @@ public class NotiService extends Service{
 	}
 
 	public void onCreate(){
-		
-//		freq = new Frequencies();
-//		freqs = freq.calculateRate();
+
 
 // 		toast is for test, but will use for notification on or off.
 //		Toast toast = Toast.makeText(getApplicationContext(), Long.toString(freqs), Toast.LENGTH_SHORT);

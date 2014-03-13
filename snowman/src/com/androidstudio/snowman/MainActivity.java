@@ -8,7 +8,10 @@ import com.androidstudio.snowman.auxiliary.PagerAdapter;
 
 import java.util.ArrayList;
 
+import android.app.ActionBar;
 import android.content.Intent;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.GradientDrawable.Orientation;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -16,6 +19,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import android.view.Window;
+
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ListView;
@@ -36,6 +42,7 @@ public class MainActivity extends FragmentActivity {
 
 	private DrawerLayout drawer;
 	private ListView drawerList;
+
 	private GridView gridViewOfCards;
 	private View gridview;
 
@@ -47,13 +54,18 @@ public class MainActivity extends FragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		//		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
+
 		setContentView(R.layout.activity_main);
+
 
 
 		// get layout that is used for gridview
 		gridview = getLayoutInflater().inflate(R.layout.viewcards_grid, null);
 
 		// splash screen
+
 		if(firstOpen){
 			Intent splash = new Intent(this, SplashActivity.class);
 			startActivity(splash);
@@ -61,7 +73,24 @@ public class MainActivity extends FragmentActivity {
 			startService(new Intent(this, NotiService.class));
 			firstOpen=false;
 		}
-		
+
+		//		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.cutombar); 
+
+		/*
+		int colors[] = {0x00ACED, 0x27DADF};
+//		ActionBar actionbar = getActionBar();
+		View layout = findViewById(R.id.mainlayout);
+		GradientDrawable gradient = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, colors);
+		gradient.setCornerRadius(0f);
+//		actionbar.setBackgroundDrawable(gradient);
+		layout.setBackgroundDrawable(gradient); 
+
+		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,R.layout.cutombar);
+	    View title = getWindow().findViewById(R.id.mainlayout);
+	    title.setBackgroundDrawable(gradient); */
+
+
+
 		// Set things for drawer to work
 		groups = getResources().getStringArray(R.array.groups);
 		currentGroup = groups[0];
@@ -69,7 +98,17 @@ public class MainActivity extends FragmentActivity {
 		// initialize layouts
 		drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 		drawerList = (ListView) findViewById(R.id.left_drawer);
+
 		gridViewOfCards = (GridView) gridview.findViewById(R.id.gridview);
+
+		currentGroup = groups[0];
+
+		// Set up adapter for ListView
+		drawerList.setAdapter(new ArrayAdapter<String>(
+				this, android.R.layout.simple_list_item_1, groups));
+		drawerList.setOnItemClickListener(new DrawerItemClickListener(this, drawerList, drawer));
+
+
 
 		//get cardhandler to store in data base
 		cardhandler = new CardHandler(this);
@@ -88,6 +127,7 @@ public class MainActivity extends FragmentActivity {
 		adapter = new PagerAdapter(this, fragments);
 		pager.setAdapter(adapter);
 
+
 		// Set up adapter and onClickListener for ListView; 
 		// This ListView is used in DrawerLayout to show the group menu
 		drawerList.setAdapter(new ArrayAdapter<String>(
@@ -97,8 +137,6 @@ public class MainActivity extends FragmentActivity {
 		if(gridViewOfCards != null)
 		// Set up adapter and onClickListener for GridView
 		gridViewOfCards.setAdapter(new GridViewAdapter(this, cards));
-
-
 
 	}
 
@@ -120,6 +158,7 @@ public class MainActivity extends FragmentActivity {
 			changeInDatabase = false;
 		}
 	}
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -157,9 +196,17 @@ public class MainActivity extends FragmentActivity {
 		case(R.id.action_new):
 
 			Intent intent = new Intent(this, AddCardActivity.class);
-		intent.putExtra(CURRENTGROUP, currentGroup);
-		startActivity(intent);
-		return true;
+
+			intent.putExtra(CURRENTGROUP, currentGroup);
+			startActivity(intent);
+			return true;
+
+		case(R.id.action_seekbar):
+
+			Intent seekIntent = new Intent(this, SeekbarActivity.class);
+			startActivity(seekIntent);
+			return true;
+
 		}
 		return super.onOptionsItemSelected(item);
 	}

@@ -58,6 +58,11 @@
             android:name="com.androidstudio.snowman.Frequencies"
             android:label="@string/title_activity_frequencies" >
         </activity>
+        <activity
+            android:name="com.androidstudio.snowman.SeekbarActivity"
+            android:label="@string/title_activity_seekbar" 
+            android:theme="@android:style/Theme.Dialog">
+        </activity>
     </application>
 
 </manifest>

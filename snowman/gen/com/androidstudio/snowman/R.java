@@ -20,6 +20,10 @@ public final class R {
     public static final class color {
         public static final int background_grey=0x7f050000;
         public static final int black=0x7f050002;
+        public static final int default_screen_bg=0x7f050003;
+        public static final int light_gray_header_color=0x7f050006;
+        public static final int rounded_container_bg=0x7f050004;
+        public static final int rounded_container_border=0x7f050005;
         public static final int white=0x7f050001;
     }
     public static final class dimen {
@@ -34,42 +38,52 @@ public final class R {
     }
     public static final class drawable {
         public static final int aslogo=0x7f020000;
-        public static final int ic_action_new=0x7f020001;
-        public static final int ic_launcher=0x7f020002;
-        public static final int noobjohn=0x7f020003;
-        public static final int sbbox=0x7f020004;
-        public static final int sblogo=0x7f020005;
-        public static final int sblogo2=0x7f020006;
-        public static final int sblogobox=0x7f020007;
-        public static final int study_buddy_icon=0x7f020008;
-        public static final int study_buddy_icon1=0x7f020009;
-        public static final int studybuddy=0x7f02000a;
-        public static final int studybuddy2=0x7f02000b;
-        public static final int studybudyyfront=0x7f02000c;
+        public static final int background_view_rounded_single=0x7f020001;
+        public static final int ic_action_new=0x7f020002;
+        public static final int ic_action_seekbar=0x7f020003;
+        public static final int ic_launcher=0x7f020004;
+        public static final int noobjohn=0x7f020005;
+        public static final int progressbar=0x7f020006;
+        public static final int sbbox=0x7f020007;
+        public static final int sblogo=0x7f020008;
+        public static final int sblogo2=0x7f020009;
+        public static final int sblogobox=0x7f02000a;
+        public static final int study_buddy_icon=0x7f02000b;
+        public static final int study_buddy_icon1=0x7f02000c;
+        public static final int studybuddy=0x7f02000d;
+        public static final int studybuddy2=0x7f02000e;
+        public static final int studybudyyfront=0x7f02000f;
     }
     public static final class id {
-        public static final int action_new=0x7f0b0015;
-        public static final int action_settings=0x7f0b0014;
-        public static final int backText=0x7f0b0012;
-        public static final int cardViewFlipper=0x7f0b0010;
+        public static final int action_new=0x7f0b001b;
+        public static final int action_seekbar=0x7f0b001c;
+        public static final int action_settings=0x7f0b001a;
+        public static final int backText=0x7f0b0017;
+        public static final int cardViewFlipper=0x7f0b0015;
         public static final int click_cancel=0x7f0b0002;
         public static final int click_post=0x7f0b0003;
         public static final int drawer_layout=0x7f0b0009;
         public static final int enter_back=0x7f0b0001;
         public static final int enter_front=0x7f0b0000;
         public static final int finish=0x7f0b0008;
-        public static final int frontText=0x7f0b0011;
+        public static final int frontText=0x7f0b0016;
         public static final int fullView=0x7f0b000c;
         public static final int fullView2=0x7f0b000e;
-        public static final int gridview=0x7f0b0013;
+        public static final int gridview=0x7f0b0019;
         public static final int left_drawer=0x7f0b000b;
+        public static final int listView1=0x7f0b0012;
+        public static final int mainlayout=0x7f0b0018;
         public static final int minus=0x7f0b0004;
         public static final int pager=0x7f0b000a;
         public static final int plus=0x7f0b0007;
         public static final int rate=0x7f0b0005;
+        public static final int refresh_match_layout=0x7f0b0010;
+        public static final int settingCancle=0x7f0b0014;
+        public static final int settingOk=0x7f0b0013;
         public static final int text=0x7f0b000d;
         public static final int text2=0x7f0b000f;
         public static final int textView2=0x7f0b0006;
+        public static final int volume_bar=0x7f0b0011;
     }
     public static final class layout {
         public static final int activity_add_card=0x7f030000;
@@ -77,9 +91,11 @@ public final class R {
         public static final int activity_main=0x7f030002;
         public static final int activity_popupdialog=0x7f030003;
         public static final int activity_popupdialog2=0x7f030004;
-        public static final int aslogo=0x7f030005;
-        public static final int card_fragment=0x7f030006;
-        public static final int viewcards_grid=0x7f030007;
+        public static final int activity_seekbar=0x7f030005;
+        public static final int aslogo=0x7f030006;
+        public static final int card_fragment=0x7f030007;
+        public static final int cutombar=0x7f030008;
+        public static final int viewcards_grid=0x7f030009;
     }
     public static final class menu {
         public static final int add_card=0x7f0a0000;
@@ -106,6 +122,7 @@ public final class R {
         public static final int title_activity_main=0x7f070008;
         public static final int title_activity_popupdialog=0x7f07000d;
         public static final int title_activity_popupdialog2=0x7f07000e;
+        public static final int title_activity_seekbar=0x7f070010;
     }
     public static final class style {
         /** 
@@ -134,6 +151,7 @@ public final class R {
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f090001;
+        public static final int CustomTheme=0x7f090004;
         public static final int Holo=0x7f090003;
         public static final int NewDialog=0x7f090002;
     }

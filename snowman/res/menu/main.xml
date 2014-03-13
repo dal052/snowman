@@ -6,6 +6,11 @@
         android:showAsAction="always"
         android:title="@string/action_new"/>
     <item
+        android:id="@+id/action_seekbar"
+        android:icon="@drawable/ic_action_seekbar"
+        android:showAsAction="always"
+        android:title="@string/action_new"/>
+    <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:showAsAction="never"

@@ -24,5 +24,6 @@
     <string name="title_activity_popupdialog">Study!</string>
     <string name="title_activity_popupdialog2">Buddy!</string>
     <string name="title_activity_frequencies">Frequencies</string>
+    <string name="title_activity_seekbar">Notification Setting</string>
 
 </resources>
