@@ -13,19 +13,21 @@ import android.content.Intent;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.IBinder;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.androidstudio.snowman.auxiliary.Card;
 
 public class NotiService extends Service{
 	
+	private int notiInt = 20;
 	private List<Card> cards;
 	private ArrayList<Card> cardList;
 	private Handler handler = new Handler(); // handler object
 	private Runnable notiService;	// runnable object
 	private int notiCounter;
-	Frequencies free; 
-	private long freqs = 8000; 
+	SeekbarActivity free; 
+	private long freqs; 
 	MainActivity mainActivity;
 
 	String mainName = "com.androidstudio.snowman.MainActivity";
@@ -39,11 +41,6 @@ public class NotiService extends Service{
 
 	public void onCreate(){
 
-
-// 		toast is for test, but will use for notification on or off.
-//		Toast toast = Toast.makeText(getApplicationContext(), Long.toString(freqs), Toast.LENGTH_SHORT);
-//		toast.show();
-
 		// instantiate runnable
 		notiService = new Runnable(){
 			
@@ -54,9 +51,10 @@ public class NotiService extends Service{
 			 */
 			public void run() {
 				// TODO Auto-generated method stub
-				
-				free = new Frequencies();
-//				freqs = free.calculateRate();
+				freqs = calculateRate(notiInt);
+			
+//				Toast toast = Toast.makeText(getApplicationContext(), Long.toString(freqs), Toast.LENGTH_SHORT);
+//				toast.show();
 
 				// status bar noti if app is on foreground
 				if( onForeground() == true){ // check if app is on foreground
@@ -159,8 +157,6 @@ public class NotiService extends Service{
 		NotificationManager notificationManager = (NotificationManager) context
 				.getSystemService(Context.NOTIFICATION_SERVICE);
 		
-
-
 		// create the notification with icon, message, and time stamp.
 		Notification notification = new Notification(icon, message, when);
 		String title = context.getString(R.string.app_name); // title is app name
@@ -210,9 +206,18 @@ public class NotiService extends Service{
 	@Override
 	// add parameter for user popup recurrence
 	public void onStart(Intent intent, int startid) {
+
 		// run ourService, from other class, this is where it starts.
+		notiInt = intent.getIntExtra(SeekbarActivity.NOTIINT, 20);
 		notiService.run();		
 	}
 
+	// calculate the frequencies to milisecond.
+	public long calculateRate(long notiInt){
+		long rate = 0;
+		rate =  (long) (1000 * 3600)/ notiInt; 	
+
+		return rate;
+	}
 
 }
