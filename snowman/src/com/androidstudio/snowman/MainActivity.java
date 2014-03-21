@@ -70,6 +70,7 @@ public class MainActivity extends FragmentActivity {
 			Intent splash = new Intent(this, SplashActivity.class);
 			startActivity(splash);
 			// start service
+			
 			startService(new Intent(this, NotiService.class));
 			firstOpen=false;
 		}

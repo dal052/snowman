@@ -1,5 +1,4 @@
 <resources>
-
     <!--
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
@@ -40,5 +39,7 @@
     <style name="CustomTheme" parent="android:Theme">
         <item name="android:windowNoTitle">false</item>
     </style>
+    
+    
     
 </resources>
