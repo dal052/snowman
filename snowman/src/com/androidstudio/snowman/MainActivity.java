@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -44,7 +45,7 @@ public class MainActivity extends FragmentActivity {
 	private ListView drawerList;
 
 	private GridView gridViewOfCards;
-	private View gridview;
+	private View gridview; // gridview layout
 
 	private ArrayList<Card> cards;
 	private ArrayList<CardFragment> fragments;
@@ -160,6 +161,17 @@ public class MainActivity extends FragmentActivity {
 		}
 	}
 
+	@Override
+	public void onBackPressed() {
+	    // if group menu bar is on change to card view
+//		if(gridview.getVisibility() == View.VISIBLE) {
+//		Log.w("debug", "i'm here");
+//		Log.w("debug", "visibility" + gridview.getVisibility());
+//		setContentView(R.layout.activity_main);
+//	} else
+//		Log.w("debug", "i'm here");
+		super.onBackPressed();
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
