@@ -1,11 +1,15 @@
 package com.androidstudio.snowman.auxiliary;
 
+import java.util.ArrayList;
+
 import com.androidstudio.snowman.MainActivity;
 import com.androidstudio.snowman.R;
 
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.ListView;
 
 public class DrawerItemClickListener implements ListView.OnItemClickListener {
@@ -27,13 +31,33 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener {
 	    list.setItemChecked(position, true);
 	    
 	    // Change currentGroup
-//	    main.currentGroup = list.getItemAtPosition(position);
+//	    main.setCurrentGroup(list.getItemAtPosition(position).toString());
 	    
-	    // regenerate cards in main activity 
-	    // regenerate fragments in main activiy
+	    // get cards of the new group from the database
+	    ArrayList<Card> cards = main.getCardHandler().getGroupCards(main.getCurrentGroup());
 	    
-	    // Change the layout of the main activity
-	    main.setContentView(main.getGridview());
+	    // regenerate cards in main activity
+	    main.setCards(cards);
+	    
+	    // regenerate fragments in main activity
+	    main.getViewPager().removeAllViews(); // remove all the old views
+	    main.getFragments(main.getCards());
+	    
+	    // notify the adapters that the data have changed 
+	    main.getViewPager().setAdapter(null);
+	    main.getViewPager().setAdapter(new PagerAdapter(main, main.getFragments()));
+	    
+	    main.getViewPager().getAdapter().notifyDataSetChanged();
+	    ((GridViewAdapter) main.getGridView().getAdapter()).notifyDataSetChanged();
+	    
+	    // Change the main view of the main activity
+	    if(main.isGridViewOn) {
+	    	main.getMainPage().removeView(main.getGridView());	
+	    } else {
+	    	main.isGridViewOn = true;
+	    	main.getMainPage().removeView(main.getViewPager());
+	    }
+	    main.getMainPage().addView(main.getGridView(), main.getIndexOfView());
 	    
 	    // Close the drawer
 	    drawer.closeDrawer(list);

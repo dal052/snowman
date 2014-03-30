@@ -14,6 +14,8 @@
     <string name="title_activity_add_card">AddCard</string>
     <string name="title_activity_card_fragment">CardFragment</string>
     <string name="action_new">New Card</string>
+    <string name="drawer_open">Choose a Deck</string>
+    <string name="drawer_close">A Deck has been Chosen</string>
 
     <string-array name="groups">
         <item>Group 1</item>
