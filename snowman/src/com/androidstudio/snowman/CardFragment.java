@@ -4,7 +4,7 @@ import com.androidstudio.snowman.auxiliary.AnimationFactory;
 import com.androidstudio.snowman.auxiliary.Card;
 import com.androidstudio.snowman.auxiliary.AnimationFactory.FlipDirection;
 
-import android.content.res.Configuration;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.method.ScrollingMovementMethod;

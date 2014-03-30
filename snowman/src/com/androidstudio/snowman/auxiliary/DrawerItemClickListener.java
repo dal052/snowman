@@ -34,7 +34,7 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener {
 //	    main.setCurrentGroup(list.getItemAtPosition(position).toString());
 	    
 	    // get cards of the new group from the database
-	    ArrayList<Card> cards = main.getCardHandler().getGroupCards(main.getCurrentGroup());
+	    ArrayList<Card> cards = MainActivity.cardhandler.getGroupCards(main.getCurrentGroup());
 	    
 	    // regenerate cards in main activity
 	    main.setCards(cards);
@@ -51,10 +51,10 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener {
 	    ((GridViewAdapter) main.getGridView().getAdapter()).notifyDataSetChanged();
 	    
 	    // Change the main view of the main activity
-	    if(main.isGridViewOn) {
+	    if(MainActivity.isGridViewOn) {
 	    	main.getMainPage().removeView(main.getGridView());	
 	    } else {
-	    	main.isGridViewOn = true;
+	    	MainActivity.isGridViewOn = true;
 	    	main.getMainPage().removeView(main.getViewPager());
 	    }
 	    main.getMainPage().addView(main.getGridView(), main.getIndexOfView());
