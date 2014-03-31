@@ -31,7 +31,7 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener {
 	    list.setItemChecked(position, true);
 	    
 	    // Change currentGroup
-//	    main.setCurrentGroup(list.getItemAtPosition(position).toString());
+	    main.setCurrentGroup(list.getItemAtPosition(position).toString());
 	    
 	    // get cards of the new group from the database
 	    ArrayList<Card> cards = MainActivity.cardhandler.getGroupCards(main.getCurrentGroup());

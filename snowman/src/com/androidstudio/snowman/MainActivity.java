@@ -14,7 +14,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import android.app.ActionBar;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -30,6 +32,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ListView;
 
@@ -288,6 +291,7 @@ public class MainActivity extends FragmentActivity {
         boolean drawerOpen = drawer.isDrawerOpen(drawerList);
         menu.findItem(R.id.action_new).setVisible(!drawerOpen);
         menu.findItem(R.id.action_seekbar).setVisible(!drawerOpen);
+        menu.findItem(R.id.action_newGroup).setVisible(drawerOpen);
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -309,7 +313,7 @@ public class MainActivity extends FragmentActivity {
 		// Handle presses on the action bar items
 		switch (item.getItemId()) {
 		case(R.id.action_new):
-
+			// create a new card
 			Intent intent = new Intent(this, AddCardActivity.class);
 
 			intent.putExtra(CURRENTGROUP, currentGroup);
@@ -317,11 +321,51 @@ public class MainActivity extends FragmentActivity {
 			return true;
 
 		case(R.id.action_seekbar):
-
+			// change notification settings
 			Intent seekIntent = new Intent(this, SeekbarActivity.class);
 			startActivity(seekIntent);
 			return true;
+		
+		case(R.id.action_newGroup):
+			// create a new group
 
+			// TODO:
+			// open dialog for user input
+			AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+			alert.setTitle("Create A New Deck");
+//			alert.setMessage("Type in the name of the deck");
+
+			// Set an EditText view to get user input 
+			final EditText input = new EditText(this);
+			alert.setView(input);
+
+			alert.setPositiveButton("Create", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int whichButton) {
+					String value = input.getText().toString();
+					// Do something with value!
+				}
+			});
+
+			alert.setNegativeButton("Cancel", null);
+
+			alert.show();
+			// check for duplicate and respond accordingly
+			// update groups list with new group name
+			// change gridView and viewPager to new group
+
+			return true;
+		
+		case(R.id.action_deleteGroup):
+			// delete current group
+
+			// TODO:
+			// delete all the cards in this group from the database
+			// update groups list 
+			// show group menu
+			
+			return true;
+			
 		}
 		return super.onOptionsItemSelected(item);
 	}

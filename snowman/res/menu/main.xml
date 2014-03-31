@@ -9,7 +9,17 @@
         android:id="@+id/action_seekbar"
         android:icon="@drawable/ic_action_seekbar"
         android:showAsAction="always"
-        android:title="@string/action_new"/>
+        android:title="@string/action_notiSetting"/>
+    <item
+        android:id="@+id/action_newGroup"
+        android:icon="@drawable/ic_action_collection"
+        android:showAsAction="always"
+        android:title="@string/action_newGroup"/>
+    <item
+        android:id="@+id/action_deleteGroup"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/action_deleteGroup"/>
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
