@@ -142,7 +142,7 @@
         android:columnCount="1" >
 
         <Button
-            android:id="@+id/settingOk"
+            android:id="@+id/settingCancle"
             style="@android:style/Widget.Holo.Light.Button.Borderless.Small"
             android:layout_width="339px"
             android:layout_height="fill_parent"
@@ -151,11 +151,11 @@
             android:layout_weight="1"
             android:background="#FFFFFF"
             android:onClick="seekbarButtons"
-            android:text="Ok"
+            android:text="Cancel"
             android:textColor="#000000" />
 
         <Button
-            android:id="@+id/settingCancle"
+            android:id="@+id/settingOk"
             style="@android:style/Widget.Holo.Light.Button.Borderless.Small"
             android:layout_width="339px"
             android:layout_height="fill_parent"
@@ -167,7 +167,7 @@
             android:layout_weight="1"
             android:background="#FFFFFF"
             android:onClick="seekbarButtons"
-            android:text="Cancel"
+            android:text="OK"
             android:textColor="#000000" />
     </GridLayout>
 

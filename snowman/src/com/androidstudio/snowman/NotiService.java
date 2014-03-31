@@ -20,7 +20,7 @@ import com.androidstudio.snowman.auxiliary.Card;
 
 public class NotiService extends Service{
 	
-	private int notiInt = 20;
+	private int notiInt;
 	private List<Card> cards;
 	private ArrayList<Card> cardList;
 	private Handler handler = new Handler(); // handler object
@@ -29,6 +29,7 @@ public class NotiService extends Service{
 	SeekbarActivity free; 
 	private long freqs; 
 	MainActivity mainActivity;
+	SeekbarActivity seek;
 
 	String mainName = "com.androidstudio.snowman.MainActivity";
 
@@ -53,8 +54,8 @@ public class NotiService extends Service{
 				// TODO Auto-generated method stub
 				freqs = calculateRate(notiInt);
 			
-//				Toast toast = Toast.makeText(getApplicationContext(), Long.toString(freqs), Toast.LENGTH_SHORT);
-//				toast.show();
+				Toast toast = Toast.makeText(getApplicationContext(), Long.toString(freqs), Toast.LENGTH_SHORT);
+				toast.show();
 
 				// status bar noti if app is on foreground
 				if( onForeground() == true){ // check if app is on foreground
@@ -206,7 +207,7 @@ public class NotiService extends Service{
 	@Override
 	// add parameter for user popup recurrence
 	public void onStart(Intent intent, int startid) {
-
+		
 		// run ourService, from other class, this is where it starts.
 		notiInt = intent.getIntExtra(SeekbarActivity.NOTIINT, 20);
 		notiService.run();		
