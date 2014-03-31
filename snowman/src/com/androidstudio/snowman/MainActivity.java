@@ -102,7 +102,8 @@ public class MainActivity extends FragmentActivity {
 						.getInt(SeekbarActivity.NOTIINT, 20);
 			Intent notiIntent = new Intent(this, NotiService.class);
 			notiIntent.putExtra(SeekbarActivity.NOTIINT, progress);
-			startService(notiIntent);
+			if(progress != 0)
+				startService(notiIntent);
 			firstOpen=false;
 		}
 

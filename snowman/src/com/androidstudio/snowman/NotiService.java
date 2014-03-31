@@ -217,7 +217,6 @@ public class NotiService extends Service{
 	public long calculateRate(long notiInt){
 		long rate = 0;
 		rate =  (long) (1000 * 3600)/ notiInt; 	
-
 		return rate;
 	}
 
