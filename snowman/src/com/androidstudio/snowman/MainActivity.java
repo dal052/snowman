@@ -25,16 +25,21 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity {
 	
@@ -329,30 +334,60 @@ public class MainActivity extends FragmentActivity {
 		case(R.id.action_newGroup):
 			// create a new group
 
-			// TODO:
 			// open dialog for user input
-			AlertDialog.Builder alert = new AlertDialog.Builder(this);
+//			AlertDialog.Builder alert = new AlertDialog.Builder(
+//					new ContextThemeWrapper(this, R.style.NewDialog));
+			final AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
 			alert.setTitle("Create A New Deck");
 //			alert.setMessage("Type in the name of the deck");
 
+			
 			// Set an EditText view to get user input 
 			final EditText input = new EditText(this);
 			alert.setView(input);
-
+			
+			// When creating a new group
 			alert.setPositiveButton("Create", new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int whichButton) {
-					String value = input.getText().toString();
-					// Do something with value!
+					String newGroupName = input.getText().toString();
+					
+					// update groups list with new group name
+					// change gridView and viewPager to new group
+
 				}
 			});
 
 			alert.setNegativeButton("Cancel", null);
+			
+			AlertDialog dialog = alert.create();
+			dialog.show();
+			final Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+			
+			// Add textWatcher to the editor to check for duplicate
+			input.addTextChangedListener(new TextWatcher() {
+				@Override
+				public void afterTextChanged(Editable s) {
+					String newGroupName = input.getText().toString();
+					
+					// check for duplicate and respond accordingly					
+					if(!positiveButton.isEnabled())
+						positiveButton.setEnabled(true);
+					else if(groups.contains(newGroupName)) {
+						Toast.makeText(getApplicationContext(), "There is a duplicate deck", Toast.LENGTH_SHORT).show();
+						positiveButton.setEnabled(false);
+					}
+				}
 
-			alert.show();
-			// check for duplicate and respond accordingly
-			// update groups list with new group name
-			// change gridView and viewPager to new group
+				@Override
+				public void beforeTextChanged(CharSequence s, int start,
+						int count, int after) {
+				}
+				@Override
+				public void onTextChanged(CharSequence s, int start,
+						int before, int count) {
+				}
+			});
 
 			return true;
 		
