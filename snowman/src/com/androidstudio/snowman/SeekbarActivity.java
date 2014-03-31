@@ -3,8 +3,11 @@ package com.androidstudio.snowman;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.Menu;
@@ -18,13 +21,15 @@ import android.widget.Toast;
 
 public class SeekbarActivity extends Activity {
 	public static String NOTIINT = "com.androidstudio.snowman.SeekbarActivity.NOTIINT";
-
-	private SeekBar volumeControl = null;
-	private long notiRate = 20;
-	private int notiInt = 20;
-
-	ListView list;
-
+	public static String NOTIPREFS = "com.androidstudio.snowman.SeekbarActivity.NOTIPREFS";
+	
+	private SeekBar barControl = null;
+	private SharedPreferences Prefs;
+	private SharedPreferences.Editor PrefEditor;
+	private ListView list;
+	
+	public int progress;
+	
 	String[] listContent = {"CSE 100", "CSE 110", "History", "Math", "Chinese", "Interviews", "Vocabulary"};
 
 	@Override
@@ -33,14 +38,21 @@ public class SeekbarActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_LEFT_ICON);
 		setContentView(R.layout.activity_seekbar);
 
-		this.setFinishOnTouchOutside(false); // clicking out side doesnt close activity
+//		this.setFinishOnTouchOutside(false); // clicking out side doesnt close activity
 		getWindow().setFeatureDrawableResource(Window.FEATURE_LEFT_ICON, R.drawable.sbbox);
 
-		volumeControl = (SeekBar) findViewById(R.id.volume_bar); // seek bar
 		list = (ListView) findViewById(R.id.listView1); // list view
+		
+
+		Prefs = getSharedPreferences(NOTIPREFS, Context.MODE_PRIVATE);
+		PrefEditor = Prefs.edit();
+		
+		int number = Prefs.getInt(NOTIINT, 20);
+		barControl = (SeekBar) findViewById(R.id.volume_bar); // seek bar
+		barControl.setProgress(number);
 
 		// the seekbar notification
-		volumeControl.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+		barControl.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 			int progressChanged = 0;
 
 			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
@@ -54,25 +66,18 @@ public class SeekbarActivity extends Activity {
 
 			public void onStopTrackingTouch(SeekBar seekBar) {
 
-				Intent intent = new Intent(SeekbarActivity.this, NotiService.class);
+//				Intent intent = new Intent(SeekbarActivity.this, NotiService.class);
 
 				if(progressChanged == 0){	
-					stopService(intent);
+//					stopService(intent);
 					Toast.makeText(SeekbarActivity.this, " Notification Off", Toast.LENGTH_SHORT).show();
 				}
 				else{
-					notiInt = progressChanged;
-
-					intent.putExtra(NOTIINT, notiInt);
-					Log.w("test", "before service notiInt: " + notiInt);
-					startService(intent);
-
 					Toast.makeText(SeekbarActivity.this, progressChanged + " Study Buddies per Hour", 
 							Toast.LENGTH_SHORT).show();
 				}
 			}
 		});
-
 
 
 		// expand list view for group select
@@ -91,26 +96,40 @@ public class SeekbarActivity extends Activity {
 			if(listbool.get(i)){
 				selected += list.getItemAtPosition(i).toString() + "\n";
 			}
-			Toast.makeText(SeekbarActivity.this,selected,Toast.LENGTH_LONG).show();
+//			Toast.makeText(SeekbarActivity.this,selected,Toast.LENGTH_LONG).show();
 
 		}
-
-
+	}
+	
+	@Override
+	public void onStop(){
+		super.onStop();
 
 	}
 
 	public void seekbarButtons(View view){
-
+	
+		Intent intent = new Intent(SeekbarActivity.this, NotiService.class);
+		progress = barControl.getProgress();
+		
 		switch(view.getId()){
-
 		case R.id.settingOk:
-
+			
+			if(barControl.getProgress() == 0)
+				stopService(intent);
+			else{
+				stopService(intent);
+				intent.putExtra(NOTIINT, progress);
+				startService(intent);
+			}
+			PrefEditor.putInt(NOTIINT, progress );
+			PrefEditor.commit();
+				
 		case R.id.settingCancle:
 			break;
 		}
 		finish();
 	}
-
 	
 	// populate the list  get the list of group name from our database here
 	public String[] prepareList(){
@@ -119,8 +138,6 @@ public class SeekbarActivity extends Activity {
 
 		return listContent;
 	}
-
-
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

@@ -33,7 +33,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -99,8 +98,11 @@ public class MainActivity extends FragmentActivity {
 			Intent splash = new Intent(this, SplashActivity.class);
 			startActivity(splash);
 			// start service
-			
-			startService(new Intent(this, NotiService.class));
+			int progress = getSharedPreferences(SeekbarActivity.NOTIPREFS, Context.MODE_PRIVATE)
+						.getInt(SeekbarActivity.NOTIINT, 20);
+			Intent notiIntent = new Intent(this, NotiService.class);
+			notiIntent.putExtra(SeekbarActivity.NOTIINT, progress);
+			startService(notiIntent);
 			firstOpen=false;
 		}
 
