@@ -3,6 +3,7 @@ package com.androidstudio.snowman;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 import android.app.ActivityManager;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -71,7 +72,7 @@ public class NotiService extends Service{
 							}	
 							// on finish repost the place it. 
 							public void onFinish() {
-								generateNotification(getApplicationContext(), "FUCK ANDROID", notiCounter);		
+//								generateNotification(getApplicationContext(), "FUCK ANDROID", notiCounter);		
 								
 							}
 						}.start();
@@ -79,12 +80,12 @@ public class NotiService extends Service{
 				}
 				// if the app is not on the foreground call showdialog.
 				if( onForeground() == false){
-					
 					showDialog();
+					stopService(new Intent(NotiService.this, NotiService.class));
 
 				}
 				// THIS IS THE PARAMTER call the freq method.
-				handler.postDelayed(notiService, 15000);	
+				handler.postDelayed(notiService, 8000);	
 			}
 		};		
 	}
