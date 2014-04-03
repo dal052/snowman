@@ -17,14 +17,15 @@
         android:icon="@drawable/sbbox"
         android:label="@string/app_name"
         android:theme="@style/Holo" >
-        
         <activity
             android:name="com.androidstudio.snowman.SplashActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
             android:name="com.androidstudio.snowman.MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:launchMode="standard"
+            android:taskAffinity="com.popup" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -46,11 +47,13 @@
         <activity
             android:name="com.androidstudio.snowman.Popupdialog"
             android:label="@string/title_activity_popupdialog"
-            android:theme="@android:style/Theme.Dialog" >
+            android:theme="@android:style/Theme.Dialog"
+            android:excludeFromRecents="true" >
         </activity>
         <activity
             android:name="com.androidstudio.snowman.Popupdialog2"
             android:label="@string/title_activity_popupdialog2"
+            android:taskAffinity="com.popup"
             android:theme="@android:style/Theme.Dialog" >
         </activity>
         <!-- Text message pop up activites -->
@@ -60,8 +63,8 @@
         </activity>
         <activity
             android:name="com.androidstudio.snowman.SeekbarActivity"
-            android:label="@string/title_activity_seekbar" 
-            android:theme="@android:style/Theme.Dialog">
+            android:label="@string/title_activity_seekbar"
+            android:theme="@android:style/Theme.Dialog" >
         </activity>
     </application>
 

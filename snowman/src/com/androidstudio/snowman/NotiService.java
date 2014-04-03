@@ -84,7 +84,7 @@ public class NotiService extends Service{
 
 				}
 				// THIS IS THE PARAMTER call the freq method.
-				handler.postDelayed(notiService, freqs);	
+				handler.postDelayed(notiService, 15000);	
 			}
 		};		
 	}
@@ -137,7 +137,9 @@ public class NotiService extends Service{
 		
 		// create intent to start the popupdialog activity class
 		Intent resInt = new Intent(this, Popupdialog.class);
-		resInt.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+		
+		resInt.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
+				Intent.FLAG_ACTIVITY_CLEAR_TASK);
 		// start the activity
 		startActivity(resInt);
 	}

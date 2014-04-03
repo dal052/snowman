@@ -53,7 +53,7 @@ public class Popupdialog extends Activity {
 		// initialize my activity to the view to use in the listener
 		TextView text = (TextView) findViewById(R.id.text);
 		// stop service
-		stopService(new Intent(Popupdialog.this, NotiService.class));
+		stopService(new Intent(getApplicationContext(), NotiService.class));
 	
 		// start the touch listener 
 		text.setOnTouchListener(new View.OnTouchListener() {
@@ -63,18 +63,25 @@ public class Popupdialog extends Activity {
 						// TODO Auto-generated method stub
 				if(event.getAction() == MotionEvent.ACTION_DOWN){		
 						// intent to switch between to next activity
-					Intent resInt = new Intent(Popupdialog.this, Popupdialog2.class);	
-					
-					
-
+					Intent resInt = new Intent(Popupdialog.this, Popupdialog2.class);					
 					finish();	// finish the first activity while flipping.	
 					startActivity(resInt); // start the next activity.
-					
 					return true; // return true if activity was touched
 				}
 				return false;	// return false if activity is not touched.
 			}
 		});
+	}
+	@Override
+	protected void onStop(){
+		super.onStop();
+		this.finish();
+	}
+	
+	@Override
+	protected void onDestroy(){
+		super.onDestroy();
+		this.finish();
 	}
 	
 	@Override
