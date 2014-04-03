@@ -37,7 +37,11 @@ public class Popupdialog2 extends Activity {
 				if(event.getAction() == MotionEvent.ACTION_DOWN){
 					
 					// restart service at the end of finishing the popup
-
+					Intent main = new Intent(Popupdialog2.this, MainActivity.class);
+					main.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
+							Intent.FLAG_FROM_BACKGROUND);
+					
+//					startActivity(main);
 					finish();	// on touch exit the popup
 					
 
@@ -46,6 +50,18 @@ public class Popupdialog2 extends Activity {
 				return false;
 			}
 		});
+	}
+	
+	@Override
+	protected void onStop(){
+		super.onStop();
+		this.finish();
+	}
+	
+	@Override
+	protected void onDestroy(){
+		super.onDestroy();
+		this.finish();
 	}
 
 	@Override
