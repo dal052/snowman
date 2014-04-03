@@ -54,22 +54,14 @@ public class SeekbarActivity extends Activity {
 		// the seekbar notification
 		barControl.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 			int progressChanged = 0;
-
 			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
 				progressChanged = progress;
 			}
-
 			public void onStartTrackingTouch(SeekBar seekBar) {
 				// TODO Auto-generated method stub
-				//				stopService(new Intent(SeekbarActivity.this, NotiService.class));
 			}
-
 			public void onStopTrackingTouch(SeekBar seekBar) {
-
-//				Intent intent = new Intent(SeekbarActivity.this, NotiService.class);
-
 				if(progressChanged == 0){	
-//					stopService(intent);
 					Toast.makeText(SeekbarActivity.this, " Notification Off", Toast.LENGTH_SHORT).show();
 				}
 				else{
