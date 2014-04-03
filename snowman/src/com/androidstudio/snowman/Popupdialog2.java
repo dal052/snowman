@@ -16,10 +16,12 @@ public class Popupdialog2 extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_LEFT_ICON);
+//		requestWindowFeature(Window.FEATURE_LEFT_ICON);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+
 
 		setContentView(R.layout.activity_popupdialog2);
-		getWindow().setFeatureDrawableResource(Window.FEATURE_LEFT_ICON, R.drawable.sbbox);
+//		getWindow().setFeatureDrawableResource(Window.FEATURE_LEFT_ICON, R.drawable.sbbox);
 
 		TextView text = (TextView) findViewById(R.id.text2); // initialize view
 		
