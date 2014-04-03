@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import javax.security.auth.Destroyable;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -34,10 +36,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity {
@@ -50,16 +55,16 @@ public class MainActivity extends FragmentActivity {
 	final public static String CURRENTGROUP = "com.androidstudio.snowman.MainActivity.CURRENTGROUP";
 	public static CardHandler cardhandler;
 	public static boolean changeInDatabase = false; // if there is a change in database, update viewpager
-	public static boolean isGridViewOn = false; // to see if the main view is on grid view
+	public static boolean isGridViewOn = true; // to see if the main view is on grid view
 	
 	private static boolean firstOpen = true;
+	final private String CURRENTCARD = "com.adnroidstudio.snowman.MainActivity.CURRENTCARD";
 	final private String GROUPSPREFS = "com.androidstudio.snowman.MainActivity.GROUPSPREFS";
 	final private CharSequence drawerTitle = "Choose a Deck"; 
-	private CharSequence title;
 	
 	private SharedPreferences prefs;
 	private Set<String> groups;
-	private String currentGroup;
+	private static String currentGroup;
 
 	private ViewPager pager;
 	private DrawerLayout drawer;
@@ -86,27 +91,15 @@ public class MainActivity extends FragmentActivity {
 
 		//		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 		setContentView(R.layout.activity_main);
-		title = getTitle();
 		
 		mainPage = (ViewGroup) findViewById(R.id.drawer_layout);
 		// get view that is used for gridview and viewpager
 		mainView = findViewById(R.id.mainView);
 		indexOfView = mainPage.indexOfChild(mainView);
 
-		// splash screen
-		if(firstOpen){
-			Intent splash = new Intent(this, SplashActivity.class);
-			startActivity(splash);
-			// start service
-			int progress = getSharedPreferences(SeekbarActivity.NOTIPREFS, Context.MODE_PRIVATE)
-						.getInt(SeekbarActivity.NOTIINT, 20);
-			Intent notiIntent = new Intent(this, NotiService.class);
-			notiIntent.putExtra(SeekbarActivity.NOTIINT, progress);
-			startService(notiIntent);
-			firstOpen=false;
-		}
+		
 
-		//		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.cutombar); 
+		// getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.cutombar); 
 
 		/*
 		int colors[] = {0x00ACED, 0x27DADF};
@@ -129,6 +122,7 @@ public class MainActivity extends FragmentActivity {
 		// make groups
 		groups = new LinkedHashSet<String>();
 		
+		// get name of groups from sharedPreferences
 		try {
 			JSONArray groupsJSON = new JSONArray(prefs.getString("groups", "[\"SAT Vocab\", \"My Deck\"]"));
 			
@@ -147,7 +141,19 @@ public class MainActivity extends FragmentActivity {
 		
 		Log.w("debug", "this is what i get: " + prefs.getString("groups", "default"));
 		
-		currentGroup = (String) groups.toArray()[0];
+		// decide the current group 
+		if(savedInstanceState == null) {
+			String receivedGroup = (String) groups.toArray()[0];
+			if(firstOpen)
+				currentGroup = receivedGroup;
+			else
+				// get from sharedPreference
+				currentGroup = prefs.getString(CURRENTGROUP, receivedGroup);
+			
+		} else
+			currentGroup = savedInstanceState.getString(CURRENTGROUP);
+		
+		setTitle("Study Buddy - " + currentGroup); // Set the title of the app
 		
 		//get cardhandler to store in data base
 		cardhandler = new CardHandler(this);
@@ -191,7 +197,7 @@ public class MainActivity extends FragmentActivity {
 			/** Called when a drawer has settled in a completely closed state. */
 			public void onDrawerClosed(View view) {
 				super.onDrawerClosed(view);
-				getActionBar().setTitle(title);
+				getActionBar().setTitle("Study Buddy - " + currentGroup);
 				invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
 			}
 
@@ -206,16 +212,33 @@ public class MainActivity extends FragmentActivity {
 		// Set the drawer toggle as the DrawerListener
 		drawer.setDrawerListener(drawerToggle);
 
-		getActionBar().setDisplayHomeAsUpEnabled(true);		
-		
 		// Set up pager
 		pager = (ViewPager) getLayoutInflater().inflate(R.layout.mainview_viewpager, null);
 		pager.setAdapter(new PagerAdapter(this, fragments));
+		
+		// set the current card if there was a card that was being viewed
+		if(savedInstanceState != null)
+			pager.setCurrentItem(savedInstanceState.getInt(CURRENTCARD));
+			
+		getActionBar().setDisplayHomeAsUpEnabled(true);		
 		
 		if(!isGridViewOn)
 			mainPage.addView(pager, indexOfView);
 		else
 			mainPage.addView(gridView, indexOfView);
+
+		// splash screen
+		if(firstOpen){
+			Intent splash = new Intent(this, SplashActivity.class);
+			startActivity(splash);
+			// start service
+			int progress = getSharedPreferences(SeekbarActivity.NOTIPREFS, Context.MODE_PRIVATE)
+					.getInt(SeekbarActivity.NOTIINT, 20);
+			Intent notiIntent = new Intent(this, NotiService.class);
+			notiIntent.putExtra(SeekbarActivity.NOTIINT, progress);
+			startService(notiIntent);
+			firstOpen=false;
+		}
 	} // end of onCreate
 
 
@@ -247,11 +270,15 @@ public class MainActivity extends FragmentActivity {
 	public void onBackPressed() {
 	    // if group menu bar is on change to card view
 		if(isGridViewOn) {
-			isGridViewOn = false;
-			mainPage.removeView(gridView);
-			mainPage.addView(pager, indexOfView);
-		} else {
+			SharedPreferences.Editor editor = prefs.edit();
+			editor.putString(CURRENTGROUP, currentGroup);
+			editor.commit();
 			super.onBackPressed();
+			
+		} else {
+			isGridViewOn = true;
+			mainPage.removeView(pager);
+			mainPage.addView(gridView, indexOfView);
 		}
 	}
 	
@@ -294,7 +321,7 @@ public class MainActivity extends FragmentActivity {
 	 /* Called whenever we call invalidateOptionsMenu() */
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        // If the nav drawer is open, hide action items related to the content view
+        // If the drawer is open, hide action items related to the content view
         boolean drawerOpen = drawer.isDrawerOpen(drawerList);
         menu.findItem(R.id.action_new).setVisible(!drawerOpen);
         menu.findItem(R.id.action_seekbar).setVisible(!drawerOpen);
@@ -355,6 +382,13 @@ public class MainActivity extends FragmentActivity {
 					String newGroupName = input.getText().toString();
 					
 					// update groups list with new group name
+					groups.add(newGroupName);
+//					((BaseAdapter) drawerList.getAdapter()).notifyDataSetChanged();
+					drawerList.setAdapter(null);
+					drawerList.setAdapter(new ArrayAdapter<String>(
+							MainActivity.this, android.R.layout.simple_list_item_1, groups.toArray(new String[0])));
+					
+					// Maybe you don't have to do the bottom
 					// change gridView and viewPager to new group
 
 				}
@@ -408,6 +442,22 @@ public class MainActivity extends FragmentActivity {
 	}
 
 	
+	@Override
+	protected void onRestoreInstanceState(Bundle savedInstanceState) {
+		currentGroup = savedInstanceState.getString(CURRENTGROUP);
+		super.onRestoreInstanceState(savedInstanceState);
+	}
+
+
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		// save the current card 
+		outState.putInt(CURRENTCARD, pager.getCurrentItem());
+		outState.putCharSequence(CURRENTGROUP,currentGroup);
+	}
+
+
 	/* *************************************************************** */
 	/* *************************************************************** */
 	/* ********************** Getters & Setters ********************** */

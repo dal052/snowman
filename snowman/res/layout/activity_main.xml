@@ -3,16 +3,14 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:icon="@drawable/studybuddy" 
     android:background="#D3D3D3"
-    >
+    android:icon="@drawable/studybuddy" >
 
- 	<View
- 	    android:id="@+id/mainView"
- 	    android:layout_width="match_parent"
+    <View
+        android:id="@+id/mainView"
+        android:layout_width="match_parent"
         android:layout_height="match_parent" />
-     
- 	
+    
     <!-- The navigation drawer -->
     <ListView
         android:id="@+id/left_drawer"
