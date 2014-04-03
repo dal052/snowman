@@ -68,9 +68,9 @@ public final class R {
         public static final int enter_back=0x7f0a0001;
         public static final int enter_front=0x7f0a0000;
         public static final int frontText=0x7f0a0011;
-        public static final int fullView=0x7f0a0007;
-        public static final int fullView2=0x7f0a0009;
+        public static final int fullView2=0x7f0a0007;
         public static final int gridview=0x7f0a0014;
+        public static final int imageView1=0x7f0a0008;
         public static final int left_drawer=0x7f0a0006;
         public static final int listView1=0x7f0a000d;
         public static final int mainView=0x7f0a0005;
@@ -79,7 +79,7 @@ public final class R {
         public static final int refresh_match_layout=0x7f0a000b;
         public static final int settingCancle=0x7f0a000e;
         public static final int settingOk=0x7f0a000f;
-        public static final int text=0x7f0a0008;
+        public static final int text=0x7f0a0009;
         public static final int text2=0x7f0a000a;
         public static final int volume_bar=0x7f0a000c;
     }
