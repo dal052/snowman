@@ -64,7 +64,7 @@ public class MainActivity extends FragmentActivity {
 	
 	private SharedPreferences prefs;
 	private Set<String> groups;
-	private static String currentGroup;
+	private String currentGroup;
 
 	private ViewPager pager;
 	private DrawerLayout drawer;
