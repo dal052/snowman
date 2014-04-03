@@ -131,6 +131,12 @@ public class SeekbarActivity extends Activity {
 		finish();
 	}
 	
+	public void stopService(){
+		Intent intent = new Intent(SeekbarActivity.this, NotiService.class);
+		stopService(intent);
+
+	}
+	
 	// populate the list  get the list of group name from our database here
 	public String[] prepareList(){
 

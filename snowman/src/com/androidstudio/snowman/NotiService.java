@@ -72,7 +72,7 @@ public class NotiService extends Service{
 							}	
 							// on finish repost the place it. 
 							public void onFinish() {
-//								generateNotification(getApplicationContext(), "FUCK ANDROID", notiCounter);		
+								generateNotification(getApplicationContext(), "FUCK ANDROID", notiCounter);		
 								
 							}
 						}.start();
@@ -80,12 +80,12 @@ public class NotiService extends Service{
 				}
 				// if the app is not on the foreground call showdialog.
 				if( onForeground() == false){
+					
 					showDialog();
-					stopService(new Intent(NotiService.this, NotiService.class));
 
 				}
 				// THIS IS THE PARAMTER call the freq method.
-				handler.postDelayed(notiService, 8000);	
+				handler.postDelayed(notiService, freqs);	
 			}
 		};		
 	}
@@ -221,6 +221,12 @@ public class NotiService extends Service{
 		long rate = 0;
 		rate =  (long) (1000 * 3600)/ notiInt; 	
 		return rate;
+	}
+	
+	@Override
+	public void onDestroy(){
+		super.onDestroy();
+		stopSelf();
 	}
 
 }

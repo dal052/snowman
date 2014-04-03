@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 public class Popupdialog extends Activity {
 	
-
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +33,10 @@ public class Popupdialog extends Activity {
 		// initialize my activity to the view to use in the listener
 		TextView text = (TextView) findViewById(R.id.text);
 		// stop service
-		stopService(new Intent(Popupdialog.this, NotiService.class));
-	
+//		stopService(new Intent(getApplicationContext(), NotiService.class));
+		SeekbarActivity seek = new SeekbarActivity();
+
+//		seek.stopService();
 		// start the touch listener 
 		text.setOnTouchListener(new View.OnTouchListener() {
 
