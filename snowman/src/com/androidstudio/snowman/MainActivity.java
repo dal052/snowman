@@ -440,14 +440,6 @@ public class MainActivity extends FragmentActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	
-	@Override
-	protected void onRestoreInstanceState(Bundle savedInstanceState) {
-		currentGroup = savedInstanceState.getString(CURRENTGROUP);
-		super.onRestoreInstanceState(savedInstanceState);
-	}
-
-
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
