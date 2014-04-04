@@ -46,14 +46,16 @@
         -->
         <activity
             android:name="com.androidstudio.snowman.Popupdialog"
+            android:allowTaskReparenting="true"
+            android:excludeFromRecents="true"
             android:label="@string/title_activity_popupdialog"
-            android:theme="@android:style/Theme.Dialog"
-            android:excludeFromRecents="true" >
+            android:parentActivityName="come.android.snowman.MainActivity"
+            android:theme="@android:style/Theme.Dialog" >
         </activity>
         <activity
             android:name="com.androidstudio.snowman.Popupdialog2"
+            android:excludeFromRecents="true"
             android:label="@string/title_activity_popupdialog2"
-            android:taskAffinity="com.popup"
             android:theme="@android:style/Theme.Dialog" >
         </activity>
         <!-- Text message pop up activites -->

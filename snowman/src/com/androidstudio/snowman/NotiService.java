@@ -85,7 +85,7 @@ public class NotiService extends Service{
 
 				}
 				// THIS IS THE PARAMTER call the freq method.
-				handler.postDelayed(notiService, freqs);	
+				handler.postDelayed(notiService, 5000);	
 			}
 		};		
 	}
@@ -226,7 +226,6 @@ public class NotiService extends Service{
 	@Override
 	public void onDestroy(){
 		super.onDestroy();
-		stopSelf();
 	}
 
 }

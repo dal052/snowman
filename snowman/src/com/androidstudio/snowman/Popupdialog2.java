@@ -40,12 +40,12 @@ public class Popupdialog2 extends Activity {
 				if(event.getAction() == MotionEvent.ACTION_DOWN){
 
 					// restart service at the end of finishing the popup
-					int progress = getSharedPreferences(SeekbarActivity.NOTIPREFS, Context.MODE_PRIVATE)
-							.getInt(SeekbarActivity.NOTIINT, 20);
-					Intent notiIntent = new Intent(getApplicationContext(), NotiService.class);
-					notiIntent.putExtra(SeekbarActivity.NOTIINT, progress);
-					if(progress != 0)
-						startService(notiIntent);
+//					int progress = getSharedPreferences(SeekbarActivity.NOTIPREFS, Context.MODE_PRIVATE)
+//							.getInt(SeekbarActivity.NOTIINT, 20);
+//					Intent notiIntent = new Intent(getApplicationContext(), NotiService.class);
+//					notiIntent.putExtra(SeekbarActivity.NOTIINT, progress);
+//					if(progress != 0)
+//						startService(notiIntent);
 					finish();	// on touch exit the popup
 
 

@@ -34,7 +34,6 @@ public class Popupdialog extends Activity {
 		TextView text = (TextView) findViewById(R.id.text);
 		// stop service
 //		stopService(new Intent(getApplicationContext(), NotiService.class));
-		SeekbarActivity seek = new SeekbarActivity();
 
 //		seek.stopService();
 		// start the touch listener 
