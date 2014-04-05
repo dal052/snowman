@@ -16,16 +16,17 @@ import android.widget.EditText;
 public class AddCardActivity extends Activity {
 
 	private String currentGroup;
-	ParseObject studybuddy = new ParseObject("studybuddies");
+	ParseObject studybuddy;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_card);
-		Parse.initialize(this, "W8YcGfW6gRdv00U1dHHlHdPFK8wKuLIXd0vxSmNl", "65moJJoXhCObFwL9lQGlFV9LSlAo5pKH9rtlE1hr");
+		
 
 		currentGroup = getIntent().getStringExtra(MainActivity.CURRENTGROUP);
 
+//		studybuddy = new ParseObject("studybuddies");
 
 
 		//		ParseObject testObject = new ParseObject("TestObject");
@@ -46,14 +47,13 @@ public class AddCardActivity extends Activity {
 			MainActivity.cardhandler.createCard(newCard);
 			MainActivity.changeInDatabase = true;
 			
-			studybuddy.put("DECK", currentGroup);
-			studybuddy.put("FRONT_PAGE", cardFront.getText().toString());
-			studybuddy.put("BACK_PAGE", cardBack.getText().toString());
-			studybuddy.saveInBackground();
+//			studybuddy.put("DECK", currentGroup);
+//			studybuddy.put("FRONT_PAGE", cardFront.getText().toString());
+//			studybuddy.put("BACK_PAGE", cardBack.getText().toString());
+//			studybuddy.saveInBackground();
 
-//			new addCardtoParseServer().execute();
-
-
+			new addCardtoParseServer().execute();
+			
 			break;
 		case R.id.click_cancel:
 			break;
@@ -61,18 +61,17 @@ public class AddCardActivity extends Activity {
 		finish();		
 	}
 	
-	/*
-	private class addCardtoParseServer extends AsyncTask< String, Void, Void>{
+	
+	private class addCardtoParseServer extends AsyncTask<Void, Void, Void>{
 
 		EditText cardBack = (EditText) findViewById(R.id.enter_back);
 		EditText cardFront = (EditText) findViewById(R.id.enter_front);
 
-
-
 		@Override
-		protected Void doInBackground(String... params) {
+		protected Void doInBackground(Void... params) {
 			// TODO Auto-generated method stub
 
+			ParseObject studybuddy = new ParseObject("studybuddies");
 			// Save data to Parse.com :]
 			studybuddy.put("DECK", currentGroup);
 			studybuddy.put("FRONT_PAGE", cardFront.getText().toString());
@@ -87,7 +86,7 @@ public class AddCardActivity extends Activity {
 		}
 	}
 	
-	*/
+	
 
 
 	@Override
