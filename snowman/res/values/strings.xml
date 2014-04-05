@@ -27,7 +27,7 @@
     <string name="click_post">Post</string>
     <string name="click_cancel">Cancel</string>
     <string name="hello_world">Hello Snowman</string>
-    <string name="empty_deck">There is no card in this deck</string>
+    <string name="emptydeck_message">No cards in this deck</string>
     <string name="drawer_open">Choose a Deck</string>
     <string name="drawer_close">A Deck has been Chosen</string>
 

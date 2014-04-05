@@ -57,7 +57,8 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener {
 	    
 		// Change the main view of the main activity
     	if(MainActivity.isGridViewOn) {
-    		main.getMainPage().removeView(main.getGridView());	
+    		main.getMainPage().removeView(main.getGridView());
+    		
     	} else {
     		MainActivity.isGridViewOn = true;
     		main.getMainPage().removeView(main.getViewPager());

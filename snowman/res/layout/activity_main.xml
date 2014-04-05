@@ -3,13 +3,24 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#D3D3D3"
+    android:background="@color/background_grey"
     android:icon="@drawable/studybuddy" >
 
     <View
         android:id="@+id/mainView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+    
+    <TextView
+    android:id="@+id/emptyDeckView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:gravity="center"
+    android:text="@string/emptydeck_message"
+    android:textSize="20sp"
+    android:textColor="@color/default_screen_bg"
+    android:visibility="gone"/>
+    
     
     <!-- The navigation drawer -->
     <ListView
