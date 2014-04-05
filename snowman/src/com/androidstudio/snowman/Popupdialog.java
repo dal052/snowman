@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 public class Popupdialog extends Activity {
 	
+	public static String back;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,15 +29,14 @@ public class Popupdialog extends Activity {
 		super.onCreate(savedInstanceState);
 		// set icon for popup
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // enabele 1
-
-
 		setContentView(R.layout.activity_popupdialog);
-		
-		
-		
-
 		// initialize my activity to the view to use in the listener
 		TextView text = (TextView) findViewById(R.id.text);
+		
+		final Card card = getIntent().getParcelableExtra(NotiService.POPUPCARD); //(Card) bun.getParcelable(NotiService.POPUPCARD);
+		// set the front card
+		text.setText(card.getFront());
+		
 		// stop service
 //		stopService(new Intent(getApplicationContext(), NotiService.class));
 
@@ -49,7 +49,8 @@ public class Popupdialog extends Activity {
 						// TODO Auto-generated method stub
 				if(event.getAction() == MotionEvent.ACTION_DOWN){		
 						// intent to switch between to next activity
-					Intent resInt = new Intent(Popupdialog.this, Popupdialog2.class);					
+					Intent resInt = new Intent(Popupdialog.this, Popupdialog2.class);
+					resInt.putExtra(NotiService.POPUPCARD, card);
 					finish();	// finish the first activity while flipping.	
 					startActivity(resInt); // start the next activity.
 					return true; // return true if activity was touched
@@ -59,16 +60,10 @@ public class Popupdialog extends Activity {
 		});
 	}
 	
-	public Card getRandomCard(){
-		Set<String> group = SeekbarActivity.getGroup();
-		int size = group.size();
-		Random rand = new Random();
-		Card randomCard = new Card();
-		
-		int choice = rand.nextInt(size);
-		
-		return null;
+	public static String getBack(){
+		return back;
 	}
+	
 	
 	@Override
 	protected void onStop(){

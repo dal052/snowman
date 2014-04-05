@@ -85,8 +85,11 @@ public class SeekbarActivity extends Activity {
 
 		list.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE); // allow our list to have multiple choice boxes
 		list.setAdapter(adapter); // set our adapter to the list.
+		
+		// call the saved selected group from main
 		group = MainActivity.getSelectedGrouplist();
 		
+		// restore check boxes in the seekbar menu when reopened
 		if(group != null){
 			ArrayList<String> savedItemList = new ArrayList<String>();
 			savedItemList.addAll(group);
@@ -99,7 +102,6 @@ public class SeekbarActivity extends Activity {
 					this.list.setItemChecked(i, false);
 			}
 		}
-
 		
 	}
 	
@@ -115,7 +117,6 @@ public class SeekbarActivity extends Activity {
 
 	public void seekbarButtons(View view){
 		
-	
 		Intent intent = new Intent(SeekbarActivity.this, NotiService.class);
 		progress = barControl.getProgress();
 		
