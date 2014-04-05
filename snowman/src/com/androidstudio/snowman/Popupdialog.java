@@ -1,5 +1,10 @@
 package com.androidstudio.snowman;
 
+import java.util.Random;
+import java.util.Set;
+
+import com.androidstudio.snowman.auxiliary.Card;
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
@@ -53,6 +58,18 @@ public class Popupdialog extends Activity {
 			}
 		});
 	}
+	
+	public Card getRandomCard(){
+		Set<String> group = SeekbarActivity.getGroup();
+		int size = group.size();
+		Random rand = new Random();
+		Card randomCard = new Card();
+		
+		int choice = rand.nextInt(size);
+		
+		return null;
+	}
+	
 	@Override
 	protected void onStop(){
 		super.onStop();

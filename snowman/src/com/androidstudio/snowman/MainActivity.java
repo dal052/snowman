@@ -63,7 +63,8 @@ public class MainActivity extends FragmentActivity {
 	final private CharSequence drawerTitle = "Choose a Deck"; 
 	
 	private SharedPreferences prefs;
-	private Set<String> groups;
+	public static Set<String> groups;
+	public static Set<String> selectedGroups;
 	private String currentGroup;
 
 	private ViewPager pager;
@@ -120,15 +121,21 @@ public class MainActivity extends FragmentActivity {
 		// make groups
 		groups = new LinkedHashSet<String>();
 		
+		selectedGroups = new LinkedHashSet<String>();
+		
 		// get name of groups from sharedPreferences
 		try {
 			JSONArray groupsJSON = new JSONArray(prefs.getString("groups", "[\"SAT Vocab\", \"My Deck\"]"));
-			
+			JSONArray selectedGroupsJSON = new JSONArray(prefs.getString("selectedGroups", "[]"));
+
 			// get the names of the group
 			for(int i=0; i<groupsJSON.length(); i++) {
 				groups.add(groupsJSON.getString(i));
 			}
 			
+			for(int i=0; i<selectedGroupsJSON.length(); i++) {
+				selectedGroups.add(selectedGroupsJSON.getString(i));
+			}
 			// if there is no groups
 			if(groupsJSON.length() == 0) 
 				groups.add("My Deck");
@@ -230,7 +237,7 @@ public class MainActivity extends FragmentActivity {
 			Intent splash = new Intent(this, SplashActivity.class);
 			startActivity(splash);
 			// start service
-			int progress = getSharedPreferences(SeekbarActivity.NOTIPREFS, Context.MODE_PRIVATE)
+			int progress = getSharedPreferences(SeekbarActivity.NOTIPREFS, Context.MODE_MULTI_PROCESS)
 						.getInt(SeekbarActivity.NOTIINT, 20);
 			Intent notiIntent = new Intent(this, NotiService.class);
 			notiIntent.putExtra(SeekbarActivity.NOTIINT, progress);
@@ -265,6 +272,8 @@ public class MainActivity extends FragmentActivity {
 		}
 	}
 
+	
+
 	@Override
 	public void onBackPressed() {
 	    // if group menu bar is on change to card view
@@ -291,7 +300,14 @@ public class MainActivity extends FragmentActivity {
 			groupsJSON.put(string);
 			Log.w("debug", "i'm here to destroy " + string);
 		}
+		
+		JSONArray selectedGroupsJSON = new JSONArray();
+		for(String string : selectedGroups) {
+			selectedGroupsJSON.put(string);
+			Log.w("debug", "i'm here to destroy " + string);
+		}
 			
+		editor.putString("selectedGroups", selectedGroupsJSON.toString());
 		editor.putString("groups", groupsJSON.toString());
 		editor.commit();
 		Log.w("debug", "i'm here to destroy ");
@@ -454,6 +470,15 @@ public class MainActivity extends FragmentActivity {
 	/* ********************** Getters & Setters ********************** */
 	/* *************************************************************** */
 	/* *************************************************************** */
+	
+	public static Set<String> getSelectedGrouplist(){
+		return selectedGroups;
+	}
+	
+	public static Set<String> getGrouplist(){
+		return groups;
+	}
+	
 	//getter for cards
 	public ArrayList<Card> getCards() {
 		return cards;

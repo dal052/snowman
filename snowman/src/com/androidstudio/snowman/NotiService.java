@@ -11,6 +11,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.IBinder;
@@ -31,6 +32,7 @@ public class NotiService extends Service{
 	private long freqs; 
 	MainActivity mainActivity;
 	SeekbarActivity seek;
+	
 
 	String mainName = "com.androidstudio.snowman.MainActivity";
 
@@ -72,7 +74,7 @@ public class NotiService extends Service{
 							}	
 							// on finish repost the place it. 
 							public void onFinish() {
-								generateNotification(getApplicationContext(), "FUCK ANDROID", notiCounter);		
+//								generateNotification(getApplicationContext(), "FUCK ANDROID", notiCounter);		
 								
 							}
 						}.start();
@@ -117,7 +119,6 @@ public class NotiService extends Service{
 	 * get top activity name
 	 */
 	protected String topAct(){
-
 		// instantiate activty manager to get current activity services.
 		ActivityManager manager = 
 				(ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
@@ -127,7 +128,6 @@ public class NotiService extends Service{
 		String className = manager.getRunningTasks(1).get(0).topActivity.getClassName();	
 		// return the top class name
 		return className;
-
 	}
 
 	/*
@@ -145,6 +145,27 @@ public class NotiService extends Service{
 		startActivity(resInt);
 	}
 
+	@Override
+	// add parameter for user popup recurrence
+	public void onStart(Intent intent, int startid) {
+		
+		// run ourService, from other class, this is where it starts.
+		notiInt = intent.getIntExtra(SeekbarActivity.NOTIINT, 20);
+		notiService.run();		
+	}
+
+	// calculate the frequencies to milisecond.
+	public long calculateRate(long notiInt){
+		long rate = 0;
+		rate =  (long) (1000 * 3600)/ notiInt; 	
+		return rate;
+	}
+	
+	@Override
+	public void onDestroy(){
+		super.onDestroy();
+	}
+	
 	/**
 	 * pass in title, description, and object for status bar notification.
 	 * this method will notify when user has the app on the foreground.
@@ -180,6 +201,8 @@ public class NotiService extends Service{
 		notification.setLatestEventInfo(this, title, message, intent);
 		// auto cancel on click.
 		notification.flags |= Notification.FLAG_AUTO_CANCEL;
+		
+		
 
 		/* 	 for stacking?
 		int notifyID = 1;
@@ -205,27 +228,6 @@ public class NotiService extends Service{
 		// notify the device
 		notificationManager.notify(notificationID, notification);
 
-	}
-
-	@Override
-	// add parameter for user popup recurrence
-	public void onStart(Intent intent, int startid) {
-		
-		// run ourService, from other class, this is where it starts.
-		notiInt = intent.getIntExtra(SeekbarActivity.NOTIINT, 20);
-		notiService.run();		
-	}
-
-	// calculate the frequencies to milisecond.
-	public long calculateRate(long notiInt){
-		long rate = 0;
-		rate =  (long) (1000 * 3600)/ notiInt; 	
-		return rate;
-	}
-	
-	@Override
-	public void onDestroy(){
-		super.onDestroy();
 	}
 
 }
