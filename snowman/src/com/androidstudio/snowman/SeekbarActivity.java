@@ -2,6 +2,9 @@ package com.androidstudio.snowman;
 
 
 
+import java.util.ArrayList;
+import java.util.Set;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -27,10 +30,14 @@ public class SeekbarActivity extends Activity {
 	private SharedPreferences Prefs;
 	private SharedPreferences.Editor PrefEditor;
 	private ListView list;
+	private Set<String> groups;
+	public static Set<String> group;
+	MainActivity main;
+
 	
 	public int progress;
 	
-	String[] listContent = {"CSE 100", "CSE 110", "History", "Math", "Chinese", "Interviews", "Vocabulary"};
+	String[] listContent;// = {"CSE 100", "CSE 110", "History", "Math", "Chinese", "Interviews", "Vocabulary"};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -78,19 +85,26 @@ public class SeekbarActivity extends Activity {
 
 		list.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE); // allow our list to have multiple choice boxes
 		list.setAdapter(adapter); // set our adapter to the list.
+		group = MainActivity.getSelectedGrouplist();
 		
-
-		String selected = "";
-		int cnt = list.getCount();
-		SparseBooleanArray listbool = list.getCheckedItemPositions();
-
-		for(int i = 0; i < cnt; i++){
-			if(listbool.get(i)){
-				selected += list.getItemAtPosition(i).toString() + "\n";
+		if(group != null){
+			ArrayList<String> savedItemList = new ArrayList<String>();
+			savedItemList.addAll(group);
+			int count = this.list.getAdapter().getCount();
+			for(int i=0; i<count; i++){
+				String currentItem = (String) this.list.getAdapter().getItem(i);
+				if(savedItemList.contains(currentItem))
+					this.list.setItemChecked(i, true);
+				else
+					this.list.setItemChecked(i, false);
 			}
-//			Toast.makeText(SeekbarActivity.this,selected,Toast.LENGTH_LONG).show();
-
 		}
+
+		
+	}
+	
+	public static Set<String> getGroup(){
+		return group;
 	}
 	
 	@Override
@@ -100,12 +114,25 @@ public class SeekbarActivity extends Activity {
 	}
 
 	public void seekbarButtons(View view){
+		
 	
 		Intent intent = new Intent(SeekbarActivity.this, NotiService.class);
 		progress = barControl.getProgress();
 		
 		switch(view.getId()){
 		case R.id.settingOk:
+			
+			int cnt = list.getCount();
+			SparseBooleanArray listbool = list.getCheckedItemPositions();
+			
+			
+			for(int i = 0; i < cnt; i++){
+				if(listbool.get(i)){
+					group.add(list.getItemAtPosition(i).toString());
+				}
+//				Toast.makeText(SeekbarActivity.this,selected,Toast.LENGTH_LONG).show();
+
+			}
 			
 			if(barControl.getProgress() == 0)
 				stopService(intent);
@@ -123,16 +150,17 @@ public class SeekbarActivity extends Activity {
 		finish();
 	}
 	
-	public void stopService(){
-		Intent intent = new Intent(SeekbarActivity.this, NotiService.class);
-		stopService(intent);
 
-	}
 	
 	// populate the list  get the list of group name from our database here
 	public String[] prepareList(){
-
+		
+		groups = MainActivity.getGrouplist();
+		
 		// get the list of groups here
+		for(int i=0; i <groups.size(); i++){
+			listContent = groups.toArray(new String[groups.size()]);
+		}
 
 		return listContent;
 	}
