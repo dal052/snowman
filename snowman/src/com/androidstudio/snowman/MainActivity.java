@@ -74,6 +74,7 @@ public class MainActivity extends FragmentActivity {
 	private GridView gridView;
 	private ViewGroup mainPage; // main layout
 	private View mainView; // main view that is changed
+	private TextView emptyDeckView; // main empty view
 	private int indexOfView; // index of main view
 	
 	private ArrayList<Card> cards;
@@ -168,6 +169,12 @@ public class MainActivity extends FragmentActivity {
 		// initialize grid view
 		gridView = (GridView) getLayoutInflater().inflate(R.layout.mainview_gridview, null);
 		
+		// set empty view to show when the deck is empty
+//		emptyDeckView = (TextView) getLayoutInflater().inflate(R.layout.mainview_emptyview, null);
+//		mainPage.addView(emptyDeckView);
+		emptyDeckView = (TextView) findViewById(R.id.emptyDeckView);
+		gridView.setEmptyView(emptyDeckView); // empty view
+		
 		// Set up adapter and onClickListener for GridView
 		GridViewAdapter gridViewAdapter = new GridViewAdapter(this, this);
 		gridView.setAdapter(gridViewAdapter);
@@ -256,8 +263,11 @@ public class MainActivity extends FragmentActivity {
 
 			// add a new fragment
 			fragments.add(CardFragment.newInstance(newCard));
+			
+			// adapate the viewpager and the gridview
 			pager.getAdapter().notifyDataSetChanged();
-
+			((BaseAdapter) gridView.getAdapter()).notifyDataSetChanged();
+			
 			// set the current card to the new card
 			pager.setCurrentItem(fragments.size() - 1);
 
@@ -387,8 +397,18 @@ public class MainActivity extends FragmentActivity {
 					drawerList.setAdapter(new ArrayAdapter<String>(
 							MainActivity.this, android.R.layout.simple_list_item_1, groups.toArray(new String[0])));
 					
-					// Maybe you don't have to do the bottom
-					// change gridView and viewPager to new group
+					// close the drawer by performin clicking the added group in the drawer list
+					int addedGroupPosition = groups.size()-1;
+					drawerList.performItemClick(
+							drawerList.getAdapter().getView(addedGroupPosition, null, null), 
+							addedGroupPosition,
+							drawerList.getAdapter().getItemId(addedGroupPosition));
+					
+					// create a new card
+					Intent intent = new Intent(MainActivity.this, AddCardActivity.class);
+
+					intent.putExtra(CURRENTGROUP, currentGroup);
+					startActivity(intent);
 
 				}
 			});
