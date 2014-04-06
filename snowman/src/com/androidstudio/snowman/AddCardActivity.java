@@ -17,27 +17,26 @@ public class AddCardActivity extends Activity {
 
 	private String currentGroup;
 	ParseObject studybuddy;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_card);
 		
-
+		// get current group name
 		currentGroup = getIntent().getStringExtra(MainActivity.CURRENTGROUP);
-
-//		studybuddy = new ParseObject("studybuddies");
-
-
-		//		ParseObject testObject = new ParseObject("TestObject");
-		//		testObject.put("foo", "bar");
-		//		testObject.saveInBackground();
-
+		
+	
 	}
+	
 
 	public void addCard(View view){
 		EditText cardBack = (EditText) findViewById(R.id.enter_back);
 		EditText cardFront = (EditText) findViewById(R.id.enter_front);
+		
+		// instantiate every time to create new class on parse.com
+//		ParseObject studybuddy = new ParseObject(currentGroup);
+		
+		 studybuddy = new ParseObject("studybuddies");
 
 		//add card to database and show on screen based on clicked button
 		switch(view.getId()){
@@ -47,13 +46,12 @@ public class AddCardActivity extends Activity {
 			MainActivity.cardhandler.createCard(newCard);
 			MainActivity.changeInDatabase = true;
 			
-//			studybuddy.put("DECK", currentGroup);
-//			studybuddy.put("FRONT_PAGE", cardFront.getText().toString());
-//			studybuddy.put("BACK_PAGE", cardBack.getText().toString());
-//			studybuddy.saveInBackground();
+			// add the data to parse.com
+			studybuddy.put("DECK", currentGroup);
+			studybuddy.put("FRONT_PAGE", cardFront.getText().toString());
+			studybuddy.put("BACK_PAGE", cardBack.getText().toString());
+			studybuddy.saveInBackground();
 
-			new addCardtoParseServer().execute();
-			
 			break;
 		case R.id.click_cancel:
 			break;
@@ -61,7 +59,7 @@ public class AddCardActivity extends Activity {
 		finish();		
 	}
 	
-	
+	/*
 	private class addCardtoParseServer extends AsyncTask<Void, Void, Void>{
 
 		EditText cardBack = (EditText) findViewById(R.id.enter_back);
@@ -71,7 +69,7 @@ public class AddCardActivity extends Activity {
 		protected Void doInBackground(Void... params) {
 			// TODO Auto-generated method stub
 
-			ParseObject studybuddy = new ParseObject("studybuddies");
+			ParseObject studybuddy = new ParseObject(currentGroup);
 			// Save data to Parse.com :]
 			studybuddy.put("DECK", currentGroup);
 			studybuddy.put("FRONT_PAGE", cardFront.getText().toString());
@@ -84,7 +82,7 @@ public class AddCardActivity extends Activity {
 			}
 			return null;
 		}
-	}
+	}*/
 	
 	
 
