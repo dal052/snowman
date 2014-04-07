@@ -5,9 +5,12 @@ import com.parse.Parse;
 import com.parse.ParseAnalytics;
 import com.parse.ParseObject;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.app.Activity;
+import android.support.v4.app.NavUtils;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
@@ -26,6 +29,9 @@ public class AddCardActivity extends Activity {
 //		ParseObject testObject = new ParseObject("TestObject");
 //		testObject.put("foo", "bar");
 //		testObject.saveInBackground();
+
+		// Show the Up button in the action bar.
+		getActionBar().setDisplayHomeAsUpEnabled(true);
 		
 	}
 
@@ -57,12 +63,13 @@ public class AddCardActivity extends Activity {
 		finish();		
 	}
 
-
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.add_card, menu);
+	public boolean onOptionsItemSelected(MenuItem item) {
+//		NavUtils.navigateUpFromSameTask(this);
+//		return true;
+		finish();
 		return true;
+//		return super.onOptionsItemSelected(item);
 	}
 
 

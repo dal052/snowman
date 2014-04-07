@@ -37,6 +37,9 @@
         <activity
             android:name="com.androidstudio.snowman.AddCardActivity"
             android:label="@string/title_activity_add_card" >
+             <meta-data 
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.androidstudio.snowman.MainActivity" />
         </activity>
 
         <service

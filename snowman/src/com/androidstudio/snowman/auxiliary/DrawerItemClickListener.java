@@ -8,6 +8,7 @@ import com.androidstudio.snowman.R;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListView;
@@ -29,8 +30,9 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener {
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		// Highlight the selected item
 	    list.setItemChecked(position, true);
+	    ViewGroup mainPage = main.getMainPage();
 	    String newGroup = list.getItemAtPosition(position).toString();
-
+	    
 	    // if the new group is not the same as the current group
 	    if(!newGroup.equals(main.getCurrentGroup())) {
 	    	// Change currentGroup
@@ -52,17 +54,26 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener {
 
 	    	main.getViewPager().getAdapter().notifyDataSetChanged();
 	    	((GridViewAdapter) main.getGridView().getAdapter()).notifyDataSetChanged();
-
+	    	
+	    	if(cards.size() == 0) {
+	    		main.findViewById(R.id.emptyDeckView).setVisibility(View.VISIBLE);
+	    	}
 	    }
+	    
+//	    View removeCardView = main.findViewById(R.id.action_removeCard);
 	    
 		// Change the main view of the main activity
     	if(MainActivity.isGridViewOn) {
-    		main.getMainPage().removeView(main.getGridView());
-    		
+    		mainPage.removeView(main.getGridView());
+//    		removeCardView.setVisibility(View.INVISIBLE);
+//    		main.invalidateOptionsMenu();
     	} else {
     		MainActivity.isGridViewOn = true;
-    		main.getMainPage().removeView(main.getViewPager());
+    		mainPage.removeView(main.getViewPager());
+//    		removeCardView.setVisibility(View.VISIBLE);
+//    		main.invalidateOptionsMenu();
     	}
+    	
     	
     	main.getMainPage().addView(main.getGridView(), main.getIndexOfView());
     	

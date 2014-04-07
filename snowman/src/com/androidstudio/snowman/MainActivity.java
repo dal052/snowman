@@ -25,6 +25,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.text.Editable;
@@ -159,7 +160,7 @@ public class MainActivity extends FragmentActivity {
 		} else
 			currentGroup = savedInstanceState.getString(CURRENTGROUP);
 		
-		setTitle("Study Buddy - " + currentGroup); // Set the title of the app
+		setTitle(currentGroup); // Set the title of the app
 		
 		//get cardhandler to store in data base
 		cardhandler = new CardHandler(this);
@@ -209,7 +210,7 @@ public class MainActivity extends FragmentActivity {
 			/** Called when a drawer has settled in a completely closed state. */
 			public void onDrawerClosed(View view) {
 				super.onDrawerClosed(view);
-				getActionBar().setTitle("Study Buddy - " + currentGroup);
+				getActionBar().setTitle(currentGroup);
 				invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
 			}
 
@@ -297,6 +298,7 @@ public class MainActivity extends FragmentActivity {
 			isGridViewOn = true;
 			mainPage.removeView(pager);
 			mainPage.addView(gridView, indexOfView);
+			invalidateOptionsMenu();
 		}
 	}
 	
@@ -349,8 +351,11 @@ public class MainActivity extends FragmentActivity {
         // If the drawer is open, hide action items related to the content view
         boolean drawerOpen = drawer.isDrawerOpen(drawerList);
         menu.findItem(R.id.action_new).setVisible(!drawerOpen);
+        menu.findItem(R.id.action_removeCard).setVisible(!drawerOpen);
+        if(isGridViewOn)
+        	menu.findItem(R.id.action_removeCard).setVisible(!isGridViewOn);
         menu.findItem(R.id.action_seekbar).setVisible(!drawerOpen);
-        menu.findItem(R.id.action_newGroup).setVisible(drawerOpen);
+        menu.findItem(R.id.action_newGroup).setVisible(drawerOpen);        
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -471,7 +476,10 @@ public class MainActivity extends FragmentActivity {
 			// show group menu
 			
 			return true;
-			
+		case(R.id.action_removeCard):
+			// remove card from the cards, fragments, and database
+			// upadate gridview and viewpager accordingly
+			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}

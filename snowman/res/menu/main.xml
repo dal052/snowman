@@ -6,6 +6,11 @@
         android:showAsAction="always"
         android:title="@string/action_new"/>
     <item
+        android:id="@+id/action_removeCard"
+        android:icon="@drawable/ic_action_remove"
+        android:showAsAction="always"
+        android:title="@string/action_removeCard"/>
+    <item
         android:id="@+id/action_seekbar"
         android:icon="@drawable/ic_action_seekbar"
         android:showAsAction="always"
@@ -21,9 +26,9 @@
         android:showAsAction="never"
         android:title="@string/action_deleteGroup"/>
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_view_developerspage"
         android:orderInCategory="100"
         android:showAsAction="never"
-        android:title="@string/action_settings"/>
+        android:title="@string/action_view_developerspage"/>
 
 </menu>

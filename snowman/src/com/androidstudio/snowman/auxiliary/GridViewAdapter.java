@@ -106,6 +106,7 @@ public class GridViewAdapter extends BaseAdapter implements OnItemClickListener 
 		MainActivity.isGridViewOn = false;
 		main.getMainPage().removeView(main.getGridView());
 		main.getMainPage().addView(pager, main.getIndexOfView());
+		main.invalidateOptionsMenu();
 
 	}
 

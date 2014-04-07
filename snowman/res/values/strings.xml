@@ -14,10 +14,12 @@
     
     <!-- Action Names -->
     <string name="action_settings">Settings</string>
+    <string name="action_view_developerspage">Developers Page</string>
     <string name="action_new">New Card</string> 
     <string name="action_notiSetting">Notification Setting</string>
     <string name="action_newGroup">New Deck</string>
     <string name="action_deleteGroup">Delete Deck</string>
+    <string name="action_removeCard">Remove Card</string>
     
     <!-- Strings in Use in the App -->
     <string name="front">Front:</string>
