@@ -3,6 +3,7 @@ package com.androidstudio.snowman;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 import android.app.ActivityManager;
 import android.app.Notification;
@@ -12,6 +13,7 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.IBinder;
@@ -33,7 +35,7 @@ public class NotiService extends Service{
 	MainActivity mainActivity;
 	SeekbarActivity seek;
 	
-
+	public static String POPUPCARD = "com.androidstudio.snowman.POPUPCARD";
 	String mainName = "com.androidstudio.snowman.MainActivity";
 
 	@Override
@@ -91,6 +93,28 @@ public class NotiService extends Service{
 			}
 		};		
 	}
+	
+	
+	public static Card getRandomCard(){
+		
+		Set<String> groups = MainActivity.selectedGroups;
+		
+		int size = groups.size();
+		int groupChoice = new Random().nextInt(size);
+		int cardChoice;
+		
+		Card randomCard;
+		
+	
+		String group = (String) groups.toArray()[groupChoice];
+		
+		ArrayList<Card> cards = MainActivity.cardhandler.getGroupCards(group);
+		cardChoice = new Random().nextInt(cards.size());
+		
+		randomCard = cards.get(cardChoice);
+		
+		return randomCard;
+	}
 
 	/** 
 	 * Method to check if App is on foreground
@@ -136,8 +160,13 @@ public class NotiService extends Service{
 	 */
 	private void showDialog(){	
 		
+		Bundle bun = new Bundle();
+		bun.putParcelable(POPUPCARD, getRandomCard());
+		
 		// create intent to start the popupdialog activity class
 		Intent resInt = new Intent(this, Popupdialog.class);
+		
+		resInt.putExtra(POPUPCARD, getRandomCard());
 		
 		resInt.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
 				Intent.FLAG_ACTIVITY_CLEAR_TASK);

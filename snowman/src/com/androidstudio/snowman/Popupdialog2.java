@@ -1,5 +1,7 @@
 package com.androidstudio.snowman;
 
+import com.androidstudio.snowman.auxiliary.Card;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -20,13 +22,15 @@ public class Popupdialog2 extends Activity {
 		//		requestWindowFeature(Window.FEATURE_LEFT_ICON);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-
 		setContentView(R.layout.activity_popupdialog2);
 		//		getWindow().setFeatureDrawableResource(Window.FEATURE_LEFT_ICON, R.drawable.sbbox);
 
 		TextView text = (TextView) findViewById(R.id.text2); // initialize view
-
-
+		
+		Card card = getIntent().getParcelableExtra(NotiService.POPUPCARD);
+		// set the back card
+		text.setText(card.getBack());
+		
 		overridePendingTransition(R.anim.popupfront, R.anim.popupback);	// do the flip animation.
 
 		// start the touch listener 

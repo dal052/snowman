@@ -54,7 +54,6 @@
             android:allowTaskReparenting="true"
             android:excludeFromRecents="true"
             android:label="@string/title_activity_popupdialog"
-            android:parentActivityName="come.android.snowman.MainActivity"
             android:theme="@android:style/Theme.Dialog" >
         </activity>
         <activity

@@ -5,6 +5,7 @@ import com.androidstudio.snowman.auxiliary.CardHandler;
 import com.androidstudio.snowman.auxiliary.DrawerItemClickListener;
 import com.androidstudio.snowman.auxiliary.GridViewAdapter;
 import com.androidstudio.snowman.auxiliary.PagerAdapter;
+import com.parse.Parse;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -99,6 +100,8 @@ public class MainActivity extends FragmentActivity {
 		// get view that is used for gridview and viewpager
 		mainView = findViewById(R.id.mainView);
 		indexOfView = mainPage.indexOfChild(mainView);
+		
+
 
 		// getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.cutombar); 
 
@@ -242,6 +245,8 @@ public class MainActivity extends FragmentActivity {
 
 		// splash screen
 		if(firstOpen){
+			Parse.initialize(this, "W8YcGfW6gRdv00U1dHHlHdPFK8wKuLIXd0vxSmNl", "65moJJoXhCObFwL9lQGlFV9LSlAo5pKH9rtlE1hr");
+
 			Intent splash = new Intent(this, SplashActivity.class);
 			startActivity(splash);
 			// start service
