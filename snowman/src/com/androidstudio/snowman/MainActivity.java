@@ -98,8 +98,8 @@ public class MainActivity extends FragmentActivity {
 		setContentView(R.layout.activity_main);
 		
 		mainPage = (ViewGroup) findViewById(R.id.drawer_layout);
-		// get view that is used for gridview and viewpager
-		mainView = findViewById(R.id.mainView);
+        // get view that is used for gridview and viewpager
+        mainView = findViewById(R.id.mainView);
 		indexOfView = mainPage.indexOfChild(mainView);
 		
 
@@ -424,32 +424,32 @@ public class MainActivity extends FragmentActivity {
 			alert.setView(input);
 			
 			// When creating a new group
-			alert.setPositiveButton("Create", new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog, int whichButton) {
-					String newGroupName = input.getText().toString();
-					
-					if(groups.size() == 0)
-						drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
-					
-					// update groups list with new group name
-					groups.add(newGroupName);
-//					((BaseAdapter) drawerList.getAdapter()).notifyDataSetChanged();
-					drawerList.setAdapter(null);
-					drawerList.setAdapter(new ArrayAdapter<String>(
-							MainActivity.this, android.R.layout.simple_list_item_1, groups.toArray(new String[0])));
-					
-					// close the drawer by performin clicking the added group in the drawer list
-					int addedGroupPosition = groups.size()-1;
-					drawerList.performItemClick(
-							drawerList.getAdapter().getView(addedGroupPosition, null, null), 
-							addedGroupPosition,
-							drawerList.getAdapter().getItemId(addedGroupPosition));
-					
-					// create a new card
-					Intent intent = new Intent(MainActivity.this, AddCardActivity.class);
+                    alert.setPositiveButton("Create", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            String newGroupName = input.getText().toString();
 
-					intent.putExtra(CURRENTGROUP, currentGroup);
-					startActivity(intent);
+                            if(groups.size() == 0)
+                                drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+
+                            // update groups list with new group name
+                            groups.add(newGroupName);
+//					((BaseAdapter) drawerList.getAdapter()).notifyDataSetChanged();
+                            drawerList.setAdapter(null);
+                            drawerList.setAdapter(new ArrayAdapter<String>(
+                                    MainActivity.this, android.R.layout.simple_list_item_1, groups.toArray(new String[0])));
+
+                            // close the drawer by performin clicking the added group in the drawer list
+                            int addedGroupPosition = groups.size()-1;
+                            drawerList.performItemClick(
+                                    drawerList.getAdapter().getView(addedGroupPosition, null, null),
+                                    addedGroupPosition,
+                                    drawerList.getAdapter().getItemId(addedGroupPosition));
+
+                            // create a new card
+                            Intent intent = new Intent(MainActivity.this, AddCardActivity.class);
+
+                            intent.putExtra(CURRENTGROUP, currentGroup);
+                            startActivity(intent);
 
 				}
 			});
@@ -498,11 +498,17 @@ public class MainActivity extends FragmentActivity {
 			// if the positive button is pressed, remove current card
 			deleteGroupAlert.setPositiveButton("Yes",  new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int whichButton) {
-					// delete all the cards in this group from the database
-          // cardhandler.deleteGroup(cards);
+			        // delete all the cards in this group from the database
+                    cardhandler.deleteGroup(cards);
 					
-					// update groups list 
-					
+				    // update groups list
+                    groups.remove(currentGroup);
+                    drawerList.setAdapter(new ArrayAdapter<String>(
+                            MainActivity.this, android.R.layout.simple_list_item_1, groups.toArray(new String[0])));
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putString(CURRENTGROUP, currentGroup);
+                    editor.commit();
+
 					// show group menu by
 					// opening up the drawer to show list of groups
 					drawer.openDrawer(Gravity.LEFT);
