@@ -7,6 +7,7 @@ import com.androidstudio.snowman.R;
 
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -32,6 +33,10 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener {
 	    list.setItemChecked(position, true);
 	    ViewGroup mainPage = main.getMainPage();
 	    String newGroup = list.getItemAtPosition(position).toString();
+	    
+	    // if the drawer is in lock mode, unlock it
+	    if(main.getDrawer().getDrawerLockMode(Gravity.LEFT) == DrawerLayout.LOCK_MODE_LOCKED_OPEN)
+	    	main.getDrawer().setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
 	    
 	    // if the new group is not the same as the current group
 	    if(!newGroup.equals(main.getCurrentGroup())) {
@@ -60,23 +65,10 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener {
 	    	}
 	    }
 	    
-//	    View removeCardView = main.findViewById(R.id.action_removeCard);
+	    // flip the main view if needed
+    	if(!MainActivity.isGridViewOn)
+    		main.flipMainView();
 	    
-		// Change the main view of the main activity
-    	if(MainActivity.isGridViewOn) {
-    		mainPage.removeView(main.getGridView());
-//    		removeCardView.setVisibility(View.INVISIBLE);
-//    		main.invalidateOptionsMenu();
-    	} else {
-    		MainActivity.isGridViewOn = true;
-    		mainPage.removeView(main.getViewPager());
-//    		removeCardView.setVisibility(View.VISIBLE);
-//    		main.invalidateOptionsMenu();
-    	}
-    	
-    	
-    	main.getMainPage().addView(main.getGridView(), main.getIndexOfView());
-    	
 	    // Close the drawer
 	    drawer.closeDrawer(list);
 	}

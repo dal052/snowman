@@ -47,6 +47,13 @@ public class CardHandler {
     database.delete(MySQLHelper.DATABASE_TABLE, MySQLHelper.CARD_ID
         + " ='" + id +"'", null);
   }
+  
+  //delete existing card
+  public void deleteGroup(ArrayList<Card> cards) {
+    for(int i=0; i<cards.size(); ++i) {
+      deleteCard(cards.get(i));
+    }
+  }
 
   //get lists of cards
   public ArrayList<Card> getAllCards() {

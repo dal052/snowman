@@ -33,6 +33,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -260,6 +261,18 @@ public class MainActivity extends FragmentActivity {
 		}
 	} // end of onCreate
 
+	// flips the main view
+	public void flipMainView() {
+		if(isGridViewOn) {
+			mainPage.removeView(gridView);
+			mainPage.addView(pager, indexOfView);
+		} else {
+			mainPage.removeView(pager);
+			mainPage.addView(gridView, indexOfView);
+		}
+		isGridViewOn = !isGridViewOn;
+		invalidateOptionsMenu();
+	}
 
 	/* *************************************************************** */	
 	/* *************************************************************** */
@@ -300,10 +313,7 @@ public class MainActivity extends FragmentActivity {
 			super.onBackPressed();
 			
 		} else {
-			isGridViewOn = true;
-			mainPage.removeView(pager);
-			mainPage.addView(gridView, indexOfView);
-			invalidateOptionsMenu();
+			flipMainView();
 		}
 	}
 	
@@ -360,6 +370,8 @@ public class MainActivity extends FragmentActivity {
         if(isGridViewOn)
         	menu.findItem(R.id.action_removeCard).setVisible(!isGridViewOn);
         menu.findItem(R.id.action_seekbar).setVisible(!drawerOpen);
+        menu.findItem(R.id.action_deleteGroup).setVisible(!drawerOpen);
+        menu.findItem(R.id.action_view_developerspage).setVisible(!drawerOpen);
         menu.findItem(R.id.action_newGroup).setVisible(drawerOpen);        
         return super.onPrepareOptionsMenu(menu);
     }
@@ -415,6 +427,9 @@ public class MainActivity extends FragmentActivity {
 			alert.setPositiveButton("Create", new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int whichButton) {
 					String newGroupName = input.getText().toString();
+					
+					if(groups.size() == 0)
+						drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
 					
 					// update groups list with new group name
 					groups.add(newGroupName);
@@ -475,15 +490,73 @@ public class MainActivity extends FragmentActivity {
 		case(R.id.action_deleteGroup):
 			// delete current group
 
-			// TODO:
-			// delete all the cards in this group from the database
-			// update groups list 
-			// show group menu
-			
+			final AlertDialog.Builder deleteGroupAlert = new AlertDialog.Builder(this);
+			deleteGroupAlert.setTitle("Delete This Deck");
+			deleteGroupAlert.setMessage("Are you sure you want to delete current deck?\n" +
+										"All the cards in this deck will be deleted.");
+
+			// if the positive button is pressed, remove current card
+			deleteGroupAlert.setPositiveButton("Yes",  new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int whichButton) {
+					// delete all the cards in this group from the database
+          // cardhandler.deleteGroup(cards);
+					
+					// update groups list 
+					
+					// show group menu by
+					// opening up the drawer to show list of groups
+					drawer.openDrawer(Gravity.LEFT);
+					
+					drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN);
+
+					Toast.makeText(getApplicationContext(), "Deck was destroyed \n" +
+															"along with all the cards in it", Toast.LENGTH_SHORT).show();
+				}
+			});
+		
+			deleteGroupAlert.setNegativeButton("No", null);
+		
+			deleteGroupAlert.show(); // show the dialog
+
 			return true;
 		case(R.id.action_removeCard):
-			// remove card from the cards, fragments, and database
-			// upadate gridview and viewpager accordingly
+			
+			final AlertDialog.Builder removeAlert = new AlertDialog.Builder(this);
+			removeAlert.setTitle("Removing This Card");
+			removeAlert.setMessage("Are you sure you want to delete current card?");
+
+			// if the positive button is pressed, remove current card
+			removeAlert.setPositiveButton("Yes",  new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int whichButton) {
+					int currentPosition = pager.getCurrentItem();
+					
+					// remove card from the cards, fragments, and database
+					cardhandler.deleteCard(cards.get(currentPosition));
+					fragments.remove(currentPosition);
+					cards.remove(currentPosition);
+
+					// upadate gridview and viewpager accordingly
+					// remove view from the pager
+					pager.setAdapter(new PagerAdapter(MainActivity.this, fragments));
+					
+					if(fragments.size() != 0)
+						pager.setCurrentItem (currentPosition); // show next card
+					else {
+						flipMainView(); // flip to grid view if there is no more cards
+					}
+						
+//					pager.getAdapter().notifyDataSetChanged();
+					((BaseAdapter) gridView.getAdapter()).notifyDataSetChanged();
+					
+					Toast.makeText(getApplicationContext(), "Card was destroyed", Toast.LENGTH_SHORT).show();
+				}
+			});
+			
+			removeAlert.setNegativeButton("No", null);
+			
+			removeAlert.show(); // show the dialog
+			return true;
+		case(R.id.action_view_developerspage):
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -578,4 +651,10 @@ public class MainActivity extends FragmentActivity {
 		MainActivity.cardhandler = cardhandler;
 	}
 
+	// getter for drawer
+	public DrawerLayout getDrawer() {
+		return drawer;
+	}
+
+	
 }
