@@ -150,7 +150,7 @@ public class MainActivity extends FragmentActivity {
 			error.printStackTrace();
 		}
 		
-		Log.w("debug", "this is what i get: " + prefs.getString("groups", "default"));
+//		Log.w("debug", "this is what i get: " + prefs.getString("groups", "default"));
 		
 		// decide the current group 
 		if(savedInstanceState == null) {
@@ -251,13 +251,13 @@ public class MainActivity extends FragmentActivity {
 			Intent splash = new Intent(this, SplashActivity.class);
 			startActivity(splash);
 			// start service
-			int progress = getSharedPreferences(SeekbarActivity.NOTIPREFS, Context.MODE_MULTI_PROCESS)
-						.getInt(SeekbarActivity.NOTIINT, 20);
-			Intent notiIntent = new Intent(this, NotiService.class);
-			notiIntent.putExtra(SeekbarActivity.NOTIINT, progress);
-			if(progress != 0)
-				startService(notiIntent);
-			firstOpen=false;
+//			int progress = getSharedPreferences(SeekbarActivity.NOTIPREFS, Context.MODE_MULTI_PROCESS)
+//						.getInt(SeekbarActivity.NOTIINT, 20);
+//			Intent notiIntent = new Intent(this, NotiService.class);
+//			notiIntent.putExtra(SeekbarActivity.NOTIINT, progress);
+//			if(progress != 0)
+//				startService(notiIntent);
+//			firstOpen=false;
 		}
 	} // end of onCreate
 
@@ -319,29 +319,7 @@ public class MainActivity extends FragmentActivity {
 	
 	@Override
 	protected void onDestroy() {
-		// save preferecnes
-		SharedPreferences.Editor editor = prefs.edit();
-		// save groups
-		JSONArray groupsJSON = new JSONArray();
-		for(String string : groups) {
-			groupsJSON.put(string);
-			Log.w("debug", "i'm here to destroy " + string);
-		}
-		
-		JSONArray selectedGroupsJSON = new JSONArray();
-		for(String string : selectedGroups) {
-			selectedGroupsJSON.put(string);
-			Log.w("debug", "i'm here to destroy " + string);
-		}
-			
-		editor.putString("selectedGroups", selectedGroupsJSON.toString());
-		editor.putString("groups", groupsJSON.toString());
-		editor.commit();
-		Log.w("debug", "i'm here to destroy ");
-		
-		// close database
-		cardhandler.close();
-		
+		updateSharedPreference();
 		super.onDestroy();
 	}
 
@@ -369,7 +347,7 @@ public class MainActivity extends FragmentActivity {
         menu.findItem(R.id.action_removeCard).setVisible(!drawerOpen);
         if(isGridViewOn)
         	menu.findItem(R.id.action_removeCard).setVisible(!isGridViewOn);
-        menu.findItem(R.id.action_seekbar).setVisible(!drawerOpen);
+        menu.findItem(R.id.action_seekbar).setVisible(false);
         menu.findItem(R.id.action_deleteGroup).setVisible(!drawerOpen);
         menu.findItem(R.id.action_view_developerspage).setVisible(!drawerOpen);
         menu.findItem(R.id.action_newGroup).setVisible(drawerOpen);        
@@ -433,6 +411,8 @@ public class MainActivity extends FragmentActivity {
 
                             // update groups list with new group name
                             groups.add(newGroupName);
+                            updateSharedPreference();
+
 //					((BaseAdapter) drawerList.getAdapter()).notifyDataSetChanged();
                             drawerList.setAdapter(null);
                             drawerList.setAdapter(new ArrayAdapter<String>(
@@ -523,6 +503,7 @@ public class MainActivity extends FragmentActivity {
 			deleteGroupAlert.setNegativeButton("No", null);
 		
 			deleteGroupAlert.show(); // show the dialog
+            updateSharedPreference();
 
 			return true;
 		case(R.id.action_removeCard):
@@ -662,5 +643,25 @@ public class MainActivity extends FragmentActivity {
 		return drawer;
 	}
 
-	
+    // update shared preference
+    private void updateSharedPreference() {
+        // save preferecnes
+        SharedPreferences.Editor editor = prefs.edit();
+        // save groups
+        JSONArray groupsJSON = new JSONArray();
+        for(String string : groups) {
+            groupsJSON.put(string);
+            Log.w("debug", "i'm here to destroy " + string);
+        }
+
+        JSONArray selectedGroupsJSON = new JSONArray();
+        for(String string : selectedGroups) {
+            selectedGroupsJSON.put(string);
+            Log.w("debug", "i'm here to destroy " + string);
+        }
+
+        editor.putString("selectedGroups", selectedGroupsJSON.toString());
+        editor.putString("groups", groupsJSON.toString());
+        editor.commit();
+    }
 }

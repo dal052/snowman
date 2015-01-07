@@ -26,8 +26,9 @@
         <activity
             android:name="com.androidstudio.snowman.MainActivity"
             android:label="@string/app_name"
-            android:launchMode="standard"
-            android:taskAffinity="com.popup" >
+            android:launchMode="standard">
+            <!--android:taskAffinity="com.popup" -->
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
